@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AdCheck AI — Kiểm tra nội dung quảng cáo</title>
+<meta name="description" content="Công cụ hỗ trợ kiểm tra nội dung quảng cáo có nguy cơ gây hiểu nhầm.">
+<style>
+:root{--bg:#f5f8ff;--panel:#fff;--ink:#17233d;--muted:#6c7891;--line:#e6ebf4;--blue:#3867f5;--blue2:#234bd2;--teal:#18b6a4;--red:#e65362;--amber:#e99a27;--green:#1b9b68;--shadow:0 14px 40px rgba(28,54,112,.08)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,"Be Vietnam Pro",system-ui,-apple-system,Segoe UI,sans-serif;transition:.25s}
+body.dark{--bg:#0d1424;--panel:#151f33;--ink:#edf2ff;--muted:#9eabc3;--line:#293650;--shadow:0 14px 40px rgba(0,0,0,.22)}
+button,input,select,textarea{font:inherit}button{cursor:pointer}.shell{display:flex;min-height:100vh}.sidebar{width:252px;background:var(--panel);border-right:1px solid var(--line);padding:25px 17px;position:fixed;inset:0 auto 0 0;z-index:5;display:flex;flex-direction:column;overflow-y:auto}.brand{display:flex;align-items:center;gap:11px;padding:0 10px 24px}.logo{width:40px;height:40px;border-radius:13px;background:linear-gradient(135deg,#4e7bff,#19b9b0);display:grid;place-items:center;color:white;font-size:21px;box-shadow:0 8px 18px #3867f533}.brand strong{font-size:17px;letter-spacing:-.5px}.brand small{display:block;color:var(--muted);font-size:10px;margin-top:2px}.nav-label{color:var(--muted);font-size:10px;font-weight:800;letter-spacing:1.4px;padding:10px 12px}.nav{display:grid;gap:4px}.nav button{border:0;background:transparent;color:var(--muted);text-align:left;padding:11px 12px;border-radius:11px;display:flex;align-items:center;gap:12px;font-size:13px;font-weight:650}.nav button:hover,.nav button.active{background:#edf2ff;color:var(--blue)}body.dark .nav button:hover,body.dark .nav button.active{background:#202e4c;color:#91adff}.nav .ico{width:20px;text-align:center;font-size:16px}.side-bottom{margin-top:auto;padding-top:16px}.tip{background:linear-gradient(145deg,#edf3ff,#e8fbf8);border:1px solid #dce8ff;border-radius:15px;padding:15px;color:#263e70;font-size:12px;line-height:1.6}body.dark .tip{background:#1b2b43;color:#cbd9ff;border-color:#304361}.tip b{display:block;margin-bottom:5px}.main{margin-left:252px;width:calc(100% - 252px);padding:0 36px 50px}.topbar{height:76px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);margin-bottom:30px}.crumb{font-size:13px;color:var(--muted)}.top-actions{display:flex;gap:10px;align-items:center}.icon-btn{border:1px solid var(--line);background:var(--panel);color:var(--ink);width:39px;height:39px;border-radius:12px;display:inline-grid;place-items:center;position:relative}.avatar{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:#e6edff;color:var(--blue);font-weight:800;font-size:12px}.content{max-width:1240px;margin:auto}.hero{display:flex;align-items:center;justify-content:space-between;gap:25px;margin:8px 0 27px}.eyebrow{display:inline-flex;align-items:center;gap:7px;color:var(--blue);background:#eaf0ff;padding:7px 11px;border-radius:30px;font-size:11px;font-weight:800;letter-spacing:.3px}body.dark .eyebrow{background:#202e4c}.hero h1{font-size:clamp(27px,3vw,39px);letter-spacing:-1.4px;line-height:1.16;margin:14px 0 10px;max-width:720px}.gradient{background:linear-gradient(90deg,#3867f5,#13b8a5);-webkit-background-clip:text;background-clip:text;color:transparent}.hero p{color:var(--muted);max-width:680px;font-size:14px;line-height:1.75;margin:0}.hero-art{width:170px;height:150px;flex:none;border-radius:28px;background:radial-gradient(circle at 70% 25%,#b7f1e8,transparent 40%),linear-gradient(145deg,#e9efff,#dff9f5);display:grid;place-items:center;font-size:66px;position:relative;overflow:hidden}.hero-art:after{content:"";position:absolute;width:120px;height:120px;border:1px solid #fff9;border-radius:50%;right:-30px;bottom:-45px}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;margin-bottom:22px}.stat,.panel{background:var(--panel);border:1px solid var(--line);border-radius:17px;box-shadow:var(--shadow)}.stat{padding:17px 19px;display:flex;align-items:center;gap:13px}.stat-icon{width:42px;height:42px;border-radius:13px;background:#edf2ff;display:grid;place-items:center;font-size:19px}body.dark .stat-icon{background:#202e4c}.stat small{display:block;color:var(--muted);font-size:11px}.stat strong{font-size:22px;display:block;margin-top:3px;letter-spacing:-.5px}.workspace{display:grid;grid-template-columns:minmax(0,1.12fr) minmax(290px,.88fr);gap:18px;align-items:start}.panel{padding:22px}.panel-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:18px}.panel h2{font-size:17px;margin:0 0 5px;letter-spacing:-.3px}.sub{font-size:12px;color:var(--muted);line-height:1.5}.tag{font-size:10px;font-weight:800;padding:6px 9px;border-radius:30px;background:#e9f8f5;color:#118c7f;white-space:nowrap}.field{margin-bottom:15px}.field label{display:block;font-size:12px;font-weight:750;margin-bottom:7px}.field input,.field select,.field textarea{width:100%;border:1px solid var(--line);border-radius:11px;background:var(--bg);color:var(--ink);padding:12px 13px;outline:none;transition:.2s;font-size:13px}.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--blue);box-shadow:0 0 0 3px #3867f51c}.field textarea{resize:vertical;min-height:180px;line-height:1.65}.field textarea::placeholder,.field input::placeholder{color:#9ba7bc}.field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field-foot{display:flex;justify-content:space-between;color:var(--muted);font-size:10px;margin-top:6px}.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:17px}.btn{border:0;border-radius:11px;padding:12px 17px;font-size:12px;font-weight:800;transition:.2s;display:inline-flex;align-items:center;justify-content:center;gap:8px}.btn-primary{background:linear-gradient(100deg,var(--blue),#527cf8);color:white;box-shadow:0 7px 18px #3867f533;flex:1}.btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 22px #3867f544}.btn-ghost{background:var(--bg);border:1px solid var(--line);color:var(--ink)}.btn-ghost:hover{border-color:var(--blue);color:var(--blue)}.right-stack{display:grid;gap:18px}.empty-state{text-align:center;padding:34px 12px 29px}.empty-illustration{width:76px;height:76px;border-radius:23px;background:linear-gradient(145deg,#edf2ff,#e6faf6);display:grid;place-items:center;font-size:34px;margin:0 auto 14px}.empty-state b{font-size:14px}.empty-state p{color:var(--muted);font-size:12px;line-height:1.6;max-width:260px;margin:7px auto 0}.result{display:none}.score-wrap{display:flex;align-items:center;gap:18px;padding:8px 0 18px}.score-ring{width:104px;height:104px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(var(--amber) 0deg,#e8edf5 0deg);position:relative;flex:none}.score-ring:before{content:"";position:absolute;inset:9px;border-radius:50%;background:var(--panel)}.score-number{position:relative;text-align:center;font-size:25px;font-weight:850}.score-number small{display:block;font-size:9px;color:var(--muted);font-weight:600}.risk-label{font-size:15px;font-weight:850}.risk-desc{font-size:11px;color:var(--muted);line-height:1.5;margin-top:5px}.mini-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.mini{background:var(--bg);border:1px solid var(--line);border-radius:11px;padding:11px;text-align:center}.mini strong{font-size:19px;display:block}.mini span{font-size:10px;color:var(--muted)}.issue-list{display:grid;gap:10px}.issue{border:1px solid var(--line);border-left:3px solid var(--amber);border-radius:11px;padding:12px;background:var(--bg)}.issue.high{border-left-color:var(--red)}.issue.low{border-left-color:var(--green)}.issue-top{display:flex;justify-content:space-between;gap:8px;align-items:center}.issue-title{font-size:12px;font-weight:800}.severity{font-size:9px;font-weight:850;padding:4px 7px;border-radius:20px;background:#fff3df;color:#ad6b08}.severity.high{background:#ffebed;color:#c83e4d}.severity.low{background:#e7f8ef;color:#168454}.issue p{font-size:11px;color:var(--muted);line-height:1.55;margin:8px 0 0}.quote{font-size:11px;background:var(--panel);padding:8px 9px;border-radius:7px;margin-top:8px;color:var(--ink)}.rewrite{background:linear-gradient(145deg,#eff5ff,#edfbf8);border:1px solid #dce9f7;border-radius:13px;padding:14px;color:#233b69;font-size:12px;line-height:1.7;white-space:pre-line}body.dark .rewrite{background:#1b2c43;color:#d6e5ff;border-color:#304361}.section{margin-top:22px}.section-title{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:10px}.section-title h3{font-size:15px;margin:0}.history-empty{color:var(--muted);font-size:12px;padding:20px;text-align:center}.history-item{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 0;border-bottom:1px solid var(--line)}.history-item:last-child{border:0}.history-item b{font-size:12px;display:block;max-width:600px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.history-item small{font-size:10px;color:var(--muted)}.history-score{font-size:11px;font-weight:850;padding:6px 9px;border-radius:8px;background:#fff3df;color:#ad6b08}.history-score.safe{background:#e7f8ef;color:#168454}.history-score.danger{background:#ffebed;color:#c83e4d}.history-actions{display:flex;gap:7px;align-items:center}.hidden{display:none!important}.toast{position:fixed;bottom:22px;right:22px;background:#182744;color:#fff;padding:12px 16px;border-radius:11px;font-size:12px;box-shadow:var(--shadow);opacity:0;transform:translateY(10px);transition:.25s;z-index:40;pointer-events:none}.toast.show{opacity:1;transform:translateY(0)}.disclaimer{font-size:10px;color:var(--muted);line-height:1.6;margin-top:17px}.mobile-menu{display:none}
+
+.page{display:none;animation:pageIn .28s ease}.page.active{display:block}@keyframes pageIn{from{opacity:.45;transform:translateY(7px)}to{opacity:1;transform:none}}
+.page-heading{margin:8px 0 24px}.page-heading h1{font-size:clamp(27px,3vw,38px);letter-spacing:-1px;margin:12px 0 7px}.page-heading p{color:var(--muted);font-size:13px;margin:0;line-height:1.6}
+.mode-tabs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px}.mode-tab{border:1px solid var(--line);border-radius:13px;padding:13px;background:var(--bg);color:var(--ink);display:flex;align-items:center;gap:10px;text-align:left;font-size:20px}.mode-tab span{display:grid;gap:4px}.mode-tab b{font-size:12px}.mode-tab small{font-size:10px;color:var(--muted);font-weight:500}.mode-tab.active{border-color:var(--blue);background:#eef3ff;box-shadow:0 0 0 2px #3867f514}body.dark .mode-tab.active{background:#202e4c}
+.mode-panel{display:none}.mode-panel.active{display:block;animation:pageIn .2s ease}
+.upload-zone{border:2px dashed #b9c9ee;border-radius:16px;background:linear-gradient(145deg,#f7f9ff,#f0fbf9);padding:28px 15px;text-align:center;color:var(--ink)}body.dark .upload-zone{background:#18263c;border-color:#40577c}.upload-zone.drag{border-color:var(--blue);background:#eaf0ff}.upload-symbol{font-size:34px;margin-bottom:8px}.upload-zone b{font-size:14px}.upload-zone p{font-size:12px;color:var(--muted);margin:6px 0 14px}.upload-zone small{display:block;font-size:10px;color:var(--muted);margin-top:13px}.image-preview-wrap{display:grid;grid-template-columns:minmax(0,1fr) 150px;gap:14px;align-items:center;margin-top:14px;padding:12px;border:1px solid var(--line);border-radius:13px;background:var(--bg)}.image-preview-wrap img{width:100%;max-height:280px;object-fit:contain;border-radius:9px}.image-info{display:grid;gap:7px;min-width:0}.image-info b{font-size:12px;overflow-wrap:anywhere}.image-info small{font-size:10px;color:var(--muted)}.ocr-status{font-size:11px;color:var(--muted);background:var(--bg);border:1px solid var(--line);padding:11px;border-radius:10px;margin-top:12px;line-height:1.5}.tips-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}.tip-card{padding:20px}.tip-card h3{font-size:14px;margin:10px 0 7px}.tip-card p{font-size:12px;color:var(--muted);line-height:1.7;margin:0}.tip-icon{font-size:25px;width:48px;height:48px;border-radius:14px;background:#edf2ff;display:grid;place-items:center}body.dark .tip-icon{background:#202e4c}
+
+/* Core & New Features Styling */
+.reward-pill{display:inline-flex;align-items:center;gap:7px;background:linear-gradient(135deg,#fff7e6,#ffefd1);border:1px solid #f7d999;color:#995f00;padding:6px 12px;border-radius:30px;font-size:12px;font-weight:800;cursor:pointer;transition:.2s}
+body.dark .reward-pill{background:#2d2518;border-color:#594624;color:#ffd073}
+.reward-pill:hover{transform:translateY(-1px)}
+.bell-dot{position:absolute;top:8px;right:8px;width:8px;height:8px;border-radius:50%;background:var(--red)}
+.chart-grid{display:grid;grid-template-columns:1.3fr .7fr;gap:18px;margin-top:22px}
+.bar-chart{display:grid;gap:14px;margin-top:14px}
+.bar-row{display:grid;gap:6px}
+.bar-meta{display:flex;justify-content:space-between;font-size:12px;font-weight:700}
+.bar-track{height:12px;background:var(--bg);border-radius:99px;overflow:hidden;border:1px solid var(--line)}
+.bar-fill{height:100%;border-radius:99px;transition:width .5s ease}
+.compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:12px}
+.compare-box{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:14px;font-size:12px;line-height:1.7;white-space:pre-line}
+.compare-box.after{background:linear-gradient(145deg,#eff5ff,#edfbf8);border-color:#dce9f7;color:#233b69}
+body.dark .compare-box.after{background:#1b2c43;color:#d6e5ff;border-color:#304361}
+.compare-label{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.6px;margin-bottom:8px;display:inline-block;padding:3px 8px;border-radius:6px}
+.hl-risk{background:#ffebed;color:#c83e4d;padding:1px 4px;border-radius:4px;font-weight:700;text-decoration:underline wavy #e65362}
+body.dark .hl-risk{background:#471e24;color:#ff8a96}
+.search-bar-row{display:grid;grid-template-columns:1fr 180px;gap:10px;margin-bottom:16px}
+.search-bar-row input,.search-bar-row select{border:1px solid var(--line);border-radius:11px;background:var(--bg);color:var(--ink);padding:10px 13px;font-size:12px;outline:none}
+.checklist-item{display:flex;align-items:flex-start;gap:12px;padding:13px;border:1px solid var(--line);border-radius:12px;background:var(--bg);margin-bottom:10px;cursor:pointer;transition:.2s}
+.checklist-item:hover{border-color:var(--blue)}
+.checklist-item input[type="checkbox"]{width:18px;height:18px;margin-top:2px;accent-color:var(--blue);cursor:pointer}
+.checklist-item.done{opacity:.7;background:var(--panel)}
+.checklist-item.done b{text-decoration:line-through;color:var(--muted)}
+.progress-bar{height:10px;background:var(--bg);border-radius:99px;overflow:hidden;border:1px solid var(--line);margin:10px 0 18px}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--blue),var(--teal));transition:width .3s}
+.tpl-filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.tpl-filter{border:1px solid var(--line);background:var(--panel);color:var(--muted);padding:7px 13px;border-radius:20px;font-size:12px;font-weight:700}
+.tpl-filter.active{background:var(--blue);color:#fff;border-color:var(--blue)}
+.tpl-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.tpl-card{display:flex;flex-direction:column;justify-content:space-between;gap:12px}
+.tpl-body{background:var(--bg);border:1px solid var(--line);border-radius:11px;padding:12px;font-size:12px;line-height:1.65;white-space:pre-line;color:var(--ink)}
+.modal-backdrop{position:fixed;inset:0;background:rgba(13,20,36,.55);backdrop-filter:blur(3px);z-index:35;display:none;place-items:center;padding:16px}
+.modal-backdrop.open{display:grid}
+.modal-box{background:var(--panel);border:1px solid var(--line);border-radius:18px;max-width:460px;width:100%;padding:22px;box-shadow:var(--shadow)}
+
+/* 5 Bonus Fun & Pro Features */
+.strict-pills{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:15px}
+.strict-pill{border:1px solid var(--line);background:var(--bg);color:var(--muted);border-radius:10px;padding:9px 10px;text-align:center;font-size:11px;font-weight:750;transition:.2s}
+.strict-pill.active{border-color:var(--blue);background:#edf2ff;color:var(--blue)}
+body.dark .strict-pill.active{background:#202e4c;color:#91adff}
+.strict-pill small{display:block;font-size:9px;font-weight:500;margin-top:2px;opacity:.85}
+
+.quiz-card{max-width:720px;margin:0 auto}
+.quiz-quote{background:linear-gradient(145deg,#f4f7ff,#eefbf9);border:1px solid #d8e5ff;border-radius:14px;padding:18px;font-size:15px;font-weight:650;line-height:1.65;margin:14px 0;color:var(--ink)}
+body.dark .quiz-quote{background:#1a2840;border-color:#2f4466}
+.quiz-options{display:grid;gap:10px}
+.quiz-opt{border:1px solid var(--line);background:var(--bg);color:var(--ink);padding:13px 16px;border-radius:12px;text-align:left;font-size:13px;font-weight:650;transition:.2s;display:flex;align-items:center;justify-content:space-between}
+.quiz-opt:hover:not(:disabled){border-color:var(--blue);transform:translateX(3px)}
+.quiz-opt.correct{background:#e7f8ef;border-color:var(--green);color:#116b43}
+.quiz-opt.wrong{background:#ffebed;border-color:var(--red);color:#b02a37}
+.quiz-explain{margin-top:14px;padding:13px;border-radius:11px;background:var(--bg);border:1px solid var(--line);font-size:12px;line-height:1.6;display:none}
+
+.ai-chat-box{border:1px solid var(--line);border-radius:13px;background:var(--bg);overflow:hidden;margin-top:14px}
+.ai-chat-msgs{max-height:220px;overflow-y:auto;padding:13px;display:grid;gap:9px;font-size:12px;line-height:1.55}
+.msg-ai{background:var(--panel);border:1px solid var(--line);padding:10px 12px;border-radius:12px 12px 12px 2px;color:var(--ink);max-width:90%}
+.msg-user{background:var(--blue);color:#fff;padding:9px 12px;border-radius:12px 12px 2px 12px;justify-self:end;max-width:85%}
+.ai-quick-prompts{display:flex;gap:6px;flex-wrap:wrap;padding:0 12px 10px}
+.ai-chip{border:1px solid var(--line);background:var(--panel);color:var(--blue);font-size:10px;font-weight:750;padding:5px 9px;border-radius:20px}
+.ai-chat-input{display:flex;border-top:1px solid var(--line);background:var(--panel)}
+.ai-chat-input input{flex:1;border:0;background:transparent;padding:11px 13px;color:var(--ink);font-size:12px;outline:none}
+.ai-chat-input button{border:0;background:var(--blue);color:#fff;padding:0 16px;font-weight:800;font-size:12px}
+
+.qr-wrap{display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center;padding:10px 0}
+.qr-wrap img{width:180px;height:180px;border-radius:14px;border:1px solid var(--line);padding:8px;background:#fff}
+.share-link-box{display:flex;width:100%;gap:8px}
+.share-link-box input{flex:1;border:1px solid var(--line);background:var(--bg);color:var(--ink);padding:9px 11px;border-radius:9px;font-size:11px}
+
+#confettiCanvas{position:fixed;inset:0;pointer-events:none;z-index:50}
+
+@media(max-width:1000px){.sidebar{width:220px}.main{margin-left:220px;width:calc(100% - 220px);padding:0 22px 40px}.workspace,.chart-grid{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}.right-stack{grid-template-columns:1fr 1fr}.right-stack .panel:last-child{grid-column:1/-1}}
+@media(max-width:700px){.sidebar{transform:translateX(-100%);transition:.25s;width:260px;box-shadow:var(--shadow)}.sidebar.open{transform:translateX(0)}.main{margin-left:0;width:100%;padding:0 15px 35px}.topbar{height:64px;margin-bottom:22px}.mobile-menu{display:inline-grid}.hero{align-items:flex-start}.hero-art{display:none}.hero h1{font-size:29px}.stats{grid-template-columns:1fr;gap:9px}.stat{padding:12px 15px}.stat-icon{width:37px;height:37px}.right-stack,.compare-grid,.tpl-grid,.search-bar-row,.strict-pills{grid-template-columns:1fr}.right-stack .panel:last-child{grid-column:auto}.panel{padding:17px}.field-row{grid-template-columns:1fr}.actions .btn{width:100%}.history-item{align-items:flex-start}.history-actions{flex-direction:column}.mode-tabs{grid-template-columns:1fr}.tips-grid{grid-template-columns:1fr}.image-preview-wrap{grid-template-columns:1fr}.page-heading h1{font-size:29px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<canvas id="confettiCanvas"></canvas>
+<div class="shell">
+<aside class="sidebar" id="sidebar">
+  <div class="brand"><div class="logo">✓</div><div><strong>AdCheck AI</strong><small>QUẢNG CÁO MINH BẠCH</small></div></div>
+  <div class="nav-label">KHÔNG GIAN LÀM VIỆC</div>
+  <nav class="nav">
+    <button class="active" data-page="home"><span class="ico">⌂</span> Tổng quan</button>
+    <button data-page="checker"><span class="ico">⌕</span> Kiểm tra quảng cáo</button>
+    <button data-page="quiz"><span class="ico">🎮</span> Thử thách săn lỗi</button>
+    <button data-page="history"><span class="ico">◷</span> Lịch sử kiểm tra</button>
+    <button data-page="checklist"><span class="ico">📋</span> Checklist trước đăng</button>
+    <button data-page="templates"><span class="ico">💡</span> Thư viện mẫu</button>
+    <button data-page="guide"><span class="ico">▤</span> Hướng dẫn sử dụng</button>
+    <button data-page="tips"><span class="ico">✧</span> Mẹo quảng cáo an toàn</button>
+  </nav>
+  <div class="side-bottom"><div class="tip"><b>✦ Mẹo sử dụng</b>Hãy cung cấp thêm bằng chứng hoặc điều kiện áp dụng để việc đánh giá nội dung có ngữ cảnh và chính xác hơn.</div><div class="nav-label" style="padding-top:16px">ADCHECK AI · PRO DEMO</div></div>
+</aside>
+<main class="main">
+  <header class="topbar">
+    <div style="display:flex;align-items:center;gap:12px">
+      <button class="icon-btn mobile-menu" id="menuBtn">☰</button>
+      <div class="crumb">Không gian làm việc <span style="padding:0 7px">/</span><b style="color:var(--ink)">Tổng quan</b></div>
+    </div>
+    <div class="top-actions">
+      <div class="reward-pill" id="rewardBadge" title="Xem điểm thưởng & cấp bậc">🏆 <span id="topPoints">0</span> điểm</div>
+      <button class="icon-btn" id="soundBtn" title="Bật/tắt âm thanh hiệu ứng">🔊</button>
+      <button class="icon-btn" id="reminderBtn" title="Cài đặt nhắc nhở kiểm tra">🔔<span class="bell-dot hidden" id="bellDot"></span></button>
+      <button class="icon-btn" id="themeBtn" title="Đổi giao diện">☾</button>
+      <div class="avatar">AC</div>
+    </div>
+  </header>
+  <div class="content">
+    <!-- PAGE: HOME -->
+    <div class="page active" id="page-home">
+      <section class="hero">
+        <div><span class="eyebrow">✦ TRỢ LÝ KIỂM TRA QUẢNG CÁO</span><h1>Quảng cáo sáng tạo.<br><span class="gradient">Thông tin luôn minh bạch.</span></h1><p>Phát hiện câu chữ có nguy cơ gây hiểu nhầm, nhận diện tuyên bố cần kiểm chứng và cải thiện nội dung quảng cáo trước khi đăng tải.</p><div class="actions"><button class="btn btn-primary" type="button" id="quickCheck">✦ Bắt đầu kiểm tra ngay</button><button class="btn btn-ghost" type="button" onclick="showPage('quiz')">🎮 Chơi thử thách săn lỗi</button><button class="btn btn-ghost" type="button" onclick="showPage('templates')">💡 Xem mẫu an toàn</button></div></div>
+        <div class="hero-art">🛡️</div>
+      </section>
+      <section class="stats">
+        <div class="stat"><div class="stat-icon">⌕</div><div><small>Tổng lượt kiểm tra</small><strong id="totalStat">0</strong></div></div>
+        <div class="stat"><div class="stat-icon">✅</div><div><small>Quảng cáo an toàn</small><strong id="safeStat" style="color:var(--green)">0</strong></div></div>
+        <div class="stat"><div class="stat-icon">⚠️</div><div><small>Cần chú ý / Rủi ro cao</small><strong id="flagStat" style="color:var(--amber)">0</strong></div></div>
+        <div class="stat"><div class="stat-icon">🏆</div><div><small>Điểm thưởng tích lũy</small><strong id="homePoints" style="color:var(--blue)">0</strong></div></div>
+      </section>
+
+      <!-- BIỂU ĐỒ THỐNG KÊ -->
+      <section class="chart-grid">
+        <div class="panel">
+          <div class="panel-head"><div><h2>📊 Thống kê mức độ an toàn quảng cáo</h2><div class="sub">Phân bổ tỷ lệ các nội dung đã kiểm tra trên thiết bị này</div></div><span class="tag">BIỂU ĐỒ TRỰC QUAN</span></div>
+          <div class="bar-chart" id="statsChart">
+            <div class="bar-row">
+              <div class="bar-meta"><span style="color:var(--green)">● An toàn (Điểm rủi ro 0–20)</span><span id="chartSafeLabel">0 (0%)</span></div>
+              <div class="bar-track"><div class="bar-fill" id="barSafe" style="width:0%;background:var(--green)"></div></div>
+            </div>
+            <div class="bar-row">
+              <div class="bar-meta"><span style="color:var(--amber)">● Cần chú ý (Điểm rủi ro 21–40)</span><span id="chartWarnLabel">0 (0%)</span></div>
+              <div class="bar-track"><div class="bar-fill" id="barWarn" style="width:0%;background:var(--amber)"></div></div>
+            </div>
+            <div class="bar-row">
+              <div class="bar-meta"><span style="color:var(--red)">● Rủi ro cao (Điểm rủi ro 41–100)</span><span id="chartHighLabel">0 (0%)</span></div>
+              <div class="bar-track"><div class="bar-fill" id="barHigh" style="width:0%;background:var(--red)"></div></div>
+            </div>
+          </div>
+          <div class="disclaimer" id="chartEmptyNote">Hãy kiểm tra ít nhất 1 mẫu quảng cáo để biểu đồ hiển thị dữ liệu thống kê chi tiết.</div>
+        </div>
+        <div class="panel">
+          <div class="panel-head"><div><h2>🏆 Hạng thành viên</h2><div class="sub">Tích điểm khi kiểm tra & tối ưu nội dung</div></div><span class="tag" id="rankBadge">CẤP 1</span></div>
+          <div style="text-align:center;padding:8px 0">
+            <div style="font-size:42px;margin-bottom:6px" id="rankIcon">🌱</div>
+            <b style="font-size:16px;display:block" id="rankTitle">Người mới minh bạch</b>
+            <small style="color:var(--muted);font-size:12px" id="rankNext">Còn 50 điểm để lên hạng tiếp theo</small>
+            <div class="progress-bar" style="margin-top:14px"><div class="progress-fill" id="rankProgress" style="width:10%"></div></div>
+            <div style="font-size:11px;color:var(--muted);text-align:left;line-height:1.6">
+              • +10 điểm mỗi lượt kiểm tra mới<br>
+              • +25 điểm khi sửa bài rủi ro thành an toàn<br>
+              • +15 điểm khi hoàn thành Checklist / Thử thách
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- PAGE: CHECKER -->
+    <div class="page" id="page-checker">
+      <section class="page-heading"><span class="eyebrow">✦ KHU VỰC PHÂN TÍCH</span><h1>Kiểm tra quảng cáo</h1><p>Chọn cách kiểm tra phù hợp: tải ảnh quảng cáo lên hoặc nhập trực tiếp nội dung.</p></section>
+      <section class="workspace" id="checker">
+        <div class="panel">
+          <div class="panel-head"><div><h2>Chọn phương thức kiểm tra</h2><div class="sub">Hai cách kiểm tra độc lập, dễ sử dụng.</div></div><span class="tag">● SẴN SÀNG</span></div>
+          <div class="mode-tabs" role="tablist">
+            <button class="mode-tab active" type="button" data-mode="imageMode">🖼️ <span><b>1. Kiểm tra bằng ảnh</b><small>Tải ảnh quảng cáo lên để trích xuất chữ</small></span></button>
+            <button class="mode-tab" type="button" data-mode="textMode">✍️ <span><b>2. Nhập nội dung</b><small>Dán hoặc nhập nội dung quảng cáo</small></span></button>
+          </div>
+          <div id="imageMode" class="mode-panel active">
+            <div class="upload-zone" id="dropZone">
+              <input type="file" id="imageInput" accept="image/png,image/jpeg,image/webp" hidden>
+              <div class="upload-symbol">☁️</div><b>Kéo thả ảnh vào đây</b><p>hoặc chọn ảnh quảng cáo từ thiết bị</p>
+              <button class="btn btn-ghost" type="button" id="chooseImage">＋ Chọn ảnh</button>
+              <small>Hỗ trợ PNG, JPG, WEBP · Khuyến nghị ảnh rõ nét, tối đa 10 MB</small>
+            </div>
+            <div class="image-preview-wrap hidden" id="imagePreviewWrap">
+              <img id="imagePreview" alt="Ảnh quảng cáo đã tải lên">
+              <div class="image-info"><b id="imageName">Ảnh quảng cáo</b><small id="imageMeta"></small><button class="btn btn-ghost" type="button" id="removeImage">Xóa ảnh</button></div>
+            </div>
+            <div class="actions"><button class="btn btn-primary" id="ocrBtn" type="button" disabled>✦ Trích xuất chữ</button></div>
+            <div class="ocr-status" id="ocrStatus">Tải ảnh lên để bắt đầu. Hệ thống sẽ thử nhận diện chữ trong ảnh rồi đưa nội dung sang phần phân tích.</div>
+            <div class="disclaimer">Ảnh được xử lý ngay trong trình duyệt bằng công nghệ OCR khi có kết nối internet. Kết quả nhận diện chữ có thể sai nếu ảnh mờ, chữ nhỏ hoặc bố cục phức tạp; hãy kiểm tra lại văn bản trước khi phân tích.</div>
+          </div>
+          <div id="textMode" class="mode-panel">
+            <!-- BỘ LỌC NỀN TẢNG THÔNG MINH -->
+            <div class="field">
+              <label>🌐 Chế độ kiểm duyệt đặc thù theo nền tảng</label>
+              <div class="strict-pills" id="platformStrictPills">
+                <button type="button" class="strict-pill active" data-strict="standard">Tiêu chuẩn chung<small>Facebook / Website</small></button>
+                <button type="button" class="strict-pill" data-strict="tiktok">TikTok Shop / Live<small>Quét mạnh cam kết & giá</small></button>
+                <button type="button" class="strict-pill" data-strict="google">Google Ads / Y tế<small>Siết chặt tuyên bố tuyệt đối</small></button>
+              </div>
+            </div>
+            <div class="field-row">
+              <div class="field"><label for="product">Tên sản phẩm / dịch vụ</label><input id="product" placeholder="Ví dụ: Serum dưỡng da ABC"></div>
+              <div class="field"><label for="industry">Lĩnh vực quảng cáo</label><select id="industry"><option value="">Chọn lĩnh vực</option><option>Mỹ phẩm & làm đẹp</option><option>Thực phẩm & đồ uống</option><option>Sức khỏe & thực phẩm bổ sung</option><option>Tài chính & đầu tư</option><option>Bất động sản</option><option>Giáo dục</option><option>Thời trang</option><option>Khác</option></select></div>
+            </div>
+            <div class="field"><label for="platform">Nền tảng dự kiến đăng</label><select id="platform"><option>Facebook</option><option>TikTok</option><option>Google Ads</option><option>Shopee / Lazada</option><option>Website</option><option>Nền tảng khác</option></select></div>
+            <div class="field"><label for="adText">Nội dung quảng cáo <span style="color:var(--red)">*</span></label><textarea id="adText" maxlength="5000" placeholder="Dán hoặc nhập nội dung quảng cáo của bạn tại đây...&#10;&#10;Ví dụ: Sản phẩm giúp giảm cân 100% chỉ sau 3 ngày, cam kết hiệu quả với tất cả mọi người!"></textarea><div class="field-foot"><span>Hãy nhập đầy đủ nội dung cần kiểm tra.</span><span id="charCount">0 / 5.000</span></div></div>
+            <div class="field"><label for="evidence">Bằng chứng / điều kiện áp dụng (không bắt buộc)</label><input id="evidence" placeholder="Ví dụ: Kết quả thử nghiệm, nguồn số liệu, điều kiện khuyến mãi..."></div>
+            <div class="actions"><button class="btn btn-primary" id="analyzeBtn">✦ Phân tích nội dung</button><button class="btn btn-ghost" id="clearBtn">Xóa nội dung</button></div>
+            <div class="disclaimer">Lưu ý: Kết quả sàng lọc theo quy tắc từ khóa và ngữ cảnh nền tảng, mang tính tham khảo hỗ trợ rà soát trước khi xuất bản.</div>
+          </div>
+        </div>
+        <div class="right-stack">
+          <div class="panel">
+            <div class="panel-head"><div><h2>Kết quả phân tích</h2><div class="sub">Tổng quan mức độ rủi ro nội dung</div></div><span class="tag" id="activePolicyTag">TIÊU CHUẨN CHUNG</span></div>
+            <div class="empty-state" id="emptyState"><div class="empty-illustration">🛡️</div><b>Chưa có kết quả phân tích</b><p>Nhập nội dung quảng cáo và nhấn “Phân tích nội dung” để xem đánh giá.</p></div>
+            <div class="result" id="resultBox">
+              <div class="score-wrap"><div class="score-ring" id="scoreRing"><div class="score-number"><span id="scoreNum">0</span><small>/ 100</small></div></div><div><div class="risk-label" id="riskLabel">Rủi ro cần chú ý</div><div class="risk-desc" id="riskDesc">Kết quả sàng lọc tự động.</div></div></div>
+              <div class="mini-metrics"><div class="mini"><strong id="highCount">0</strong><span>Nguy cơ cao</span></div><div class="mini"><strong id="midCount">0</strong><span>Cần xem xét</span></div><div class="mini"><strong id="lowCount">0</strong><span>Gợi ý</span></div></div>
+              <div class="actions">
+                <button class="btn btn-ghost" style="flex:1" id="exportPdfBtn">📥 Xuất PDF</button>
+                <button class="btn btn-ghost" style="flex:1" id="shareQrBtn">🔗 Chia sẻ QR</button>
+              </div>
+            </div>
+          </div>
+          <div class="panel result" id="recommendPanel"><div class="panel-head"><div><h2>Đề xuất chỉnh sửa</h2><div class="sub">Phiên bản diễn đạt thận trọng hơn</div></div></div><div class="rewrite" id="rewriteText"></div><div class="actions"><button class="btn btn-ghost" id="copyRewrite">▣ Sao chép đề xuất</button><button class="btn btn-primary" id="applyRewriteBtn">↻ Áp dụng & kiểm tra lại</button></div></div>
+        </div>
+      </section>
+
+      <!-- SO SÁNH TRƯỚC VÀ SAU -->
+      <section class="section panel result" id="comparePanel">
+        <div class="section-title"><div><h3>⚖️ So sánh trước và sau khi chỉnh sửa</h3><div class="sub">Đối chiếu trực tiếp các cụm từ rủi ro với phiên bản đề xuất minh bạch</div></div><span class="tag">SO SÁNH TRỰC QUAN</span></div>
+        <div class="compare-grid">
+          <div>
+            <span class="compare-label" style="background:#ffebed;color:#c83e4d">Bản gốc (Trước chỉnh sửa)</span>
+            <div class="compare-box" id="beforeCompareText"></div>
+          </div>
+          <div>
+            <span class="compare-label" style="background:#e7f8ef;color:#168454">Bản đề xuất (Sau chỉnh sửa)</span>
+            <div class="compare-box after" id="afterCompareText"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TRỢ LÝ ẢO GIẢI THÍCH CHI TIẾT -->
+      <section class="section panel result" id="aiChatPanel">
+        <div class="section-title"><div><h3>💬 Trợ lý ảo tư vấn câu chữ</h3><div class="sub">Đặt câu hỏi về các lỗi vi phạm hoặc nhờ gợi ý cách viết lại thu hút hơn</div></div><span class="tag">TRỢ LÝ TƯƠNG TÁC</span></div>
+        <div class="ai-chat-box">
+          <div class="ai-chat-msgs" id="aiChatMsgs">
+            <div class="msg-ai">Xin chào! Tôi đã rà soát xong bài quảng cáo của bạn. Bạn cần tôi giải thích kỹ hơn về lỗi nào hay muốn gợi ý 3 tiêu đề thay thế an toàn hơn?</div>
+          </div>
+          <div class="ai-quick-prompts">
+            <button type="button" class="ai-chip" data-q="Tại sao bài này lại bị tính điểm rủi ro như vậy?">❓ Tại sao bị đánh rủi ro?</button>
+            <button type="button" class="ai-chip" data-q="Gợi ý cho tôi 3 tiêu đề thu hút mà vẫn an toàn">✨ Gợi ý 3 tiêu đề mới</button>
+            <button type="button" class="ai-chip" data-q="Cần bổ sung câu miễn trừ trách nhiệm (disclaimer) gì?">📜 Câu miễn trừ cần thêm</button>
+          </div>
+          <form class="ai-chat-input" id="aiChatForm">
+            <input id="aiChatInput" placeholder="Nhập câu hỏi của bạn về nội dung quảng cáo này...">
+            <button type="submit">Gửi</button>
+          </form>
+        </div>
+      </section>
+
+      <section class="section panel result" id="detailsPanel"><div class="section-title"><h3>Chi tiết các điểm cần chú ý</h3><span class="sub" id="issueSummary"></span></div><div class="issue-list" id="issueList"></div></section>
+    </div>
+
+    <!-- PAGE: MINI-GAME SĂN TỪ KHÓA PHẠM QUY -->
+    <div class="page" id="page-quiz">
+      <section class="page-heading"><span class="eyebrow">🎮 HỌC MÀ CHƠI</span><h1>Thử thách săn từ khóa phạm quy</h1><p>Đọc mẫu quảng cáo bên dưới và chọn đúng lỗi vi phạm chính sách để nhận +15 điểm thưởng mỗi câu đúng!</p></section>
+      <section class="panel quiz-card">
+        <div class="section-title">
+          <div><h3 id="quizProgressTitle">Câu hỏi 1 / 5</h3><div class="sub">Rèn luyện phản xạ nhận diện câu chữ nhạy cảm</div></div>
+          <span class="tag" id="quizScoreBadge">ĐIỂM PHIÊN NÀY: 0</span>
+        </div>
+        <div class="quiz-quote" id="quizQuestionText">Đang tải câu hỏi...</div>
+        <div class="quiz-options" id="quizOptions"></div>
+        <div class="quiz-explain" id="quizExplain"></div>
+        <div class="actions" style="margin-top:16px">
+          <button class="btn btn-primary hidden" id="nextQuizBtn">Câu tiếp theo ➔</button>
+        </div>
+      </section>
+    </div>
+
+    <!-- PAGE: HISTORY -->
+    <div class="page" id="page-history">
+      <section class="page-heading"><span class="eyebrow">◷ THEO DÕI</span><h1>Lịch sử kiểm tra</h1><p>Tìm kiếm nhanh và xem lại các nội dung đã phân tích trên trình duyệt hiện tại.</p></section>
+      <section class="section panel" id="history">
+        <div class="section-title">
+          <div><h3>Danh sách đã kiểm tra</h3><div class="sub">Các lần kiểm tra được lưu trên trình duyệt hiện tại.</div></div>
+          <div class="history-actions">
+            <button class="btn btn-ghost" id="exportHistoryPdfBtn">📥 Xuất PDF gần nhất</button>
+            <button class="btn btn-ghost" id="exportBtn">↓ Xuất TXT</button>
+            <button class="btn btn-ghost" id="clearHistory">Xóa lịch sử</button>
+          </div>
+        </div>
+        <div class="search-bar-row">
+          <input type="search" id="historySearch" placeholder="🔍 Tìm nhanh theo tên sản phẩm, từ khóa nội dung...">
+          <select id="historyFilter">
+            <option value="all">Tất cả mức độ</option>
+            <option value="safe">An toàn (0–20)</option>
+            <option value="warn">Cần chú ý (21–40)</option>
+            <option value="danger">Rủi ro cao (41–100)</option>
+          </select>
+        </div>
+        <div id="historyList" class="history-empty">Chưa có lịch sử. Hãy thực hiện lần kiểm tra đầu tiên.</div>
+      </section>
+    </div>
+
+    <!-- PAGE: CHECKLIST -->
+    <div class="page" id="page-checklist">
+      <section class="page-heading"><span class="eyebrow">📋 RÀ SOÁT XUẤT BẢN</span><h1>Checklist trước khi đăng</h1><p>Đánh dấu các tiêu chí dưới đây trước khi nhấn nút đăng bài quảng cáo chính thức.</p></section>
+      <section class="panel">
+        <div class="section-title">
+          <div><h3>Tiến độ rà soát chuẩn bị</h3><div class="sub" id="checklistStatusText">Đã hoàn thành 0 / 8 tiêu chí</div></div>
+          <button class="btn btn-ghost" id="resetChecklistBtn">↺ Đặt lại checklist</button>
+        </div>
+        <div class="progress-bar"><div class="progress-fill" id="checklistProgress" style="width:0%"></div></div>
+        <div id="checklistContainer"></div>
+      </section>
+    </div>
+
+    <!-- PAGE: TEMPLATES -->
+    <div class="page" id="page-templates">
+      <section class="page-heading"><span class="eyebrow">💡 NỘI DUNG CHUẨN MỰC</span><h1>Thư viện mẫu quảng cáo an toàn</h1><p>Tham khảo các mẫu câu chữ minh bạch, hạn chế rủi ro theo từng ngành hàng để áp dụng ngay.</p></section>
+      <div class="tpl-filters" id="tplFilters">
+        <button class="tpl-filter active" data-cat="all">Tất cả lĩnh vực</button>
+        <button class="tpl-filter" data-cat="Mỹ phẩm & làm đẹp">Mỹ phẩm & làm đẹp</button>
+        <button class="tpl-filter" data-cat="Sức khỏe & thực phẩm bổ sung">Sức khỏe & thực phẩm</button>
+        <button class="tpl-filter" data-cat="Tài chính & đầu tư">Tài chính & đầu tư</button>
+        <button class="tpl-filter" data-cat="Giáo dục">Giáo dục</button>
+        <button class="tpl-filter" data-cat="Bất động sản">Bất động sản</button>
+      </div>
+      <section class="tpl-grid" id="templateGrid"></section>
+    </div>
+
+    <!-- PAGE: GUIDE -->
+    <div class="page" id="page-guide">
+      <section class="page-heading"><span class="eyebrow">▤ BẮT ĐẦU NHANH</span><h1>Hướng dẫn sử dụng</h1><p>Các bước để rà soát nội dung quảng cáo một cách có hệ thống.</p></section>
+      <section class="section panel" id="guide"><div class="section-title"><h3>Hướng dẫn sử dụng</h3><span class="tag">4 BƯỚC ĐƠN GIẢN</span></div><div class="field-row"><div class="sub"><b style="color:var(--ink)">01 · Nhập nội dung</b><br>Dán nội dung quảng cáo cần kiểm tra vào khung nhập liệu hoặc tải ảnh lên.</div><div class="sub"><b style="color:var(--ink)">02 · Chọn nền tảng & ngữ cảnh</b><br>Chọn chế độ nền tảng (Facebook, TikTok Shop, Google Ads) và lĩnh vực phù hợp.</div><div class="sub"><b style="color:var(--ink)">03 · Phân tích, So sánh & Hỏi đáp</b><br>Xem điểm rủi ro, đối chiếu bản sửa và hỏi trực tiếp Trợ lý ảo nếu cần gợi ý thêm.</div><div class="sub"><b style="color:var(--ink)">04 · Hoàn thiện & Chia sẻ</b><br>Đánh dấu Checklist trước khi đăng, xuất file PDF hoặc tạo mã QR gửi cho đồng nghiệp.</div></div></section>
+    </div>
+
+    <!-- PAGE: TIPS -->
+    <div class="page" id="page-tips">
+      <section class="page-heading"><span class="eyebrow">✧ THƯ VIỆN KIẾN THỨC</span><h1>Mẹo quảng cáo an toàn</h1><p>Những điểm nên rà soát trước khi xuất bản nội dung quảng cáo.</p></section>
+      <section class="tips-grid">
+        <article class="panel tip-card"><div class="tip-icon">🔎</div><h3>1. Có căn cứ cho tuyên bố</h3><p>Lưu lại tài liệu chứng minh cho số liệu, hiệu quả, chứng nhận, đánh giá và lời khẳng định về sản phẩm.</p></article>
+        <article class="panel tip-card"><div class="tip-icon">⚖️</div><h3>2. Nêu rõ điều kiện</h3><p>Thông tin giảm giá, hoàn tiền, bảo hành, miễn phí cần có thời hạn, đối tượng và điều kiện áp dụng cụ thể.</p></article>
+        <article class="panel tip-card"><div class="tip-icon">💬</div><h3>3. Tránh cam kết tuyệt đối</h3><p>Cẩn trọng với các cụm từ như “100%”, “chắc chắn”, “tốt nhất”, “khỏi hoàn toàn” nếu không đủ căn cứ.</p></article>
+        <article class="panel tip-card"><div class="tip-icon">👥</div><h3>4. Đặt mình vào vị trí khách hàng</h3><p>Đọc lại quảng cáo và tự hỏi liệu người xem có thể hiểu sai về công dụng, giá, kết quả hoặc rủi ro hay không.</p></article>
+        <article class="panel tip-card"><div class="tip-icon">📌</div><h3>5. Minh bạch hình ảnh</h3><p>Không dùng hình ảnh trước–sau, hình người nổi tiếng, chuyên gia hoặc chứng nhận theo cách khiến người xem hiểu nhầm.</p></article>
+        <article class="panel tip-card"><div class="tip-icon">🧾</div><h3>6. Kiểm tra lần cuối</h3><p>Đối chiếu nội dung với sản phẩm thực tế, hồ sơ chứng minh và quy định áp dụng trước khi đăng tải.</p></article>
+      </section>
+    </div>
+    <footer class="disclaimer" style="text-align:center;padding:28px 0 8px">© 2026 AdCheck AI · Công cụ hỗ trợ nâng cao tính minh bạch trong quảng cáo.<br>Không thay thế tư vấn pháp lý, chuyên môn hoặc việc xác minh bằng chứng thực tế.</footer>
+  </div>
+</main>
+</div>
+
+<!-- MODAL NHẮC NHỞ KIỂM TRA -->
+<div class="modal-backdrop" id="reminderModal">
+  <div class="modal-box">
+    <div class="panel-head" style="margin-bottom:12px">
+      <div><h2>🔔 Nhắc nhở kiểm tra quảng cáo</h2><div class="sub">Thiết lập lời nhắc rà soát nội dung trước giờ xuất bản</div></div>
+      <button class="icon-btn" style="width:32px;height:32px" id="closeReminderModal">✕</button>
+    </div>
+    <div class="field">
+      <label>Trạng thái nhắc nhở</label>
+      <select id="reminderToggle">
+        <option value="off">Tắt nhắc nhở</option>
+        <option value="on">Bật nhắc nhở tự động</option>
+      </select>
+    </div>
+    <div class="field">
+      <label for="reminderMinutes">Nhắc lại sau (phút)</label>
+      <select id="reminderMinutes">
+        <option value="1">1 phút (Dùng thử nhanh)</option>
+        <option value="15">15 phút trước khi đăng bài</option>
+        <option value="30" selected>30 phút</option>
+        <option value="60">60 phút</option>
+      </select>
+    </div>
+    <div class="field">
+      <label for="reminderNote">Ghi chú chiến dịch cần nhắc</label>
+      <input id="reminderNote" placeholder="Ví dụ: Kiểm tra bài chạy Ads Facebook tối nay...">
+    </div>
+    <div class="actions">
+      <button class="btn btn-primary" id="saveReminderBtn">Lưu cài đặt nhắc nhở</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL CHIA SẺ QR & LINK -->
+<div class="modal-backdrop" id="shareModal">
+  <div class="modal-box">
+    <div class="panel-head" style="margin-bottom:12px">
+      <div><h2>🔗 Chia sẻ kết quả kiểm tra</h2><div class="sub">Quét mã QR hoặc gửi liên kết cho đồng nghiệp / khách hàng</div></div>
+      <button class="icon-btn" style="width:32px;height:32px" id="closeShareModal">✕</button>
+    </div>
+    <div class="qr-wrap">
+      <img id="qrCodeImg" alt="Mã QR báo cáo">
+      <div style="font-size:12px;color:var(--muted)" id="shareSummaryText"></div>
+      <div class="share-link-box">
+        <input id="shareLinkInput" readonly>
+        <button class="btn btn-primary" style="flex:none;padding:9px 14px" id="copyShareLinkBtn">Sao chép</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+<script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<script>
+const $=id=>document.getElementById(id);
+let lastResult=null;
+let lastAnalyzedScore=null;
+let strictMode="standard";
+let soundEnabled=true;
+
+/* HIỆU ỨNG ÂM THANH & PHÁO HOA (CONFETTI) */
+function playSound(type){
+  if(!soundEnabled) return;
+  try{
+    const ctx=new (window.AudioContext||window.webkitAudioContext)();
+    const osc=ctx.createOscillator();
+    const gain=ctx.createGain();
+    osc.connect(gain);gain.connect(ctx.destination);
+    if(type==="win"){
+      osc.type="triangle";
+      osc.frequency.setValueAtTime(523.25,ctx.currentTime);
+      osc.frequency.setValueAtTime(659.25,ctx.currentTime+0.1);
+      osc.frequency.setValueAtTime(783.99,ctx.currentTime+0.2);
+      osc.frequency.setValueAtTime(1046.5,ctx.currentTime+0.3);
+      gain.gain.setValueAtTime(0.15,ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001,ctx.currentTime+0.65);
+      osc.start();osc.stop(ctx.currentTime+0.65);
+    }else if(type==="warn"){
+      osc.type="sine";
+      osc.frequency.setValueAtTime(320,ctx.currentTime);
+      osc.frequency.setValueAtTime(260,ctx.currentTime+0.12);
+      gain.gain.setValueAtTime(0.1,ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001,ctx.currentTime+0.3);
+      osc.start();osc.stop(ctx.currentTime+0.3);
+    }
+  }catch(e){}
+}
+
+$("soundBtn").addEventListener("click",()=>{
+  soundEnabled=!soundEnabled;
+  $("soundBtn").textContent=soundEnabled?"🔊":"🔇";
+  toast(soundEnabled?"Đã bật âm thanh hiệu ứng":"Đã tắt âm thanh hiệu ứng");
+});
+
+function launchConfetti(){
+  const canvas=$("confettiCanvas");
+  const ctx=canvas.getContext("2d");
+  canvas.width=window.innerWidth;
+  canvas.height=window.innerHeight;
+  const colors=["#3867f5","#18b6a4","#1b9b68","#e99a27","#ff5e7e","#a855f7"];
+  const pieces=Array.from({length:95},()=>({
+    x:Math.random()*canvas.width,
+    y:Math.random()*canvas.height-canvas.height,
+    r:Math.random()*6+4,
+    d:Math.random()*5+2,
+    color:colors[Math.floor(Math.random()*colors.length)],
+    tilt:Math.random()*10-5
+  }));
+  let frame=0;
+  function draw(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    pieces.forEach(p=>{
+      ctx.beginPath();
+      ctx.fillStyle=p.color;
+      ctx.fillRect(p.x,p.y,p.r,p.r*0.6);
+      p.y+=p.d;
+      p.x+=Math.sin(frame*0.05+p.tilt)*1.5;
+    });
+    frame++;
+    if(frame<130) requestAnimationFrame(draw);
+    else ctx.clearRect(0,0,canvas.width,canvas.height);
+  }
+  draw();
+}
+
+/* BỘ LỌC NỀN TẢNG THÔNG MINH */
+document.querySelectorAll(".strict-pill").forEach(btn=>btn.addEventListener("click",()=>{
+  document.querySelectorAll(".strict-pill").forEach(b=>b.classList.remove("active"));
+  btn.classList.add("active");
+  strictMode=btn.dataset.strict;
+  const labels={standard:"TIÊU CHUẨN CHUNG",tiktok:"CHẾ ĐỘ TIKTOK SHOP",google:"CHẾ ĐỘ GOOGLE ADS"};
+  $("activePolicyTag").textContent=labels[strictMode];
+  if(strictMode==="tiktok") $("platform").value="TikTok";
+  else if(strictMode==="google") $("platform").value="Google Ads";
+  toast(`Đã chuyển sang ${labels[strictMode]}`);
+}));
+
+const patterns=[
+ {re:/tốt nhất( thị trường| việt nam)?|số 1( việt nam| thị trường)?|đứng đầu thị trường|hàng đầu/gi,cat:"Tuyên bố vượt trội",sev:"medium",why:"Tuyên bố vị trí dẫn đầu hoặc tốt nhất cần có tiêu chí so sánh rõ ràng và bằng chứng đáng tin cậy.",suggest:"Nêu rõ tiêu chí, phạm vi và nguồn chứng minh; nếu chưa có căn cứ, hãy mô tả ưu điểm cụ thể thay vì khẳng định vị trí số 1."},
+ {re:/100%|cam kết tuyệt đối|chắc chắn thành công|đảm bảo hiệu quả|hiệu quả tuyệt đối|không bao giờ thất bại/gi,cat:"Cam kết tuyệt đối",sev:"high",why:"Cách diễn đạt tuyệt đối có thể tạo kỳ vọng rằng kết quả được bảo đảm trong mọi trường hợp.",suggest:"Nêu kết quả có thể đạt được kèm điều kiện, phạm vi áp dụng và bằng chứng phù hợp; tránh bảo đảm kết quả nếu không thể kiểm chứng."},
+ {re:/khỏi bệnh hoàn toàn|chữa khỏi|trị dứt điểm|không có tác dụng phụ|thay thế thuốc|điều trị khỏi/gi,cat:"Tuyên bố sức khỏe nhạy cảm",sev:"high",why:"Tuyên bố về chữa bệnh hoặc không có tác dụng phụ có thể khiến người đọc hiểu sai về tính an toàn và công dụng y tế.",suggest:"Chỉ mô tả công dụng được phép và có căn cứ; không trình bày sản phẩm như phương pháp chữa bệnh hoặc thay thế tư vấn y tế."},
+ {re:/giảm cân.{0,25}(cấp tốc|chỉ sau|trong)|trắng da tức thì|trị nám tận gốc|mọc tóc thần tốc/gi,cat:"Hiệu quả nhanh / phóng đại",sev:"high",why:"Kết quả nhanh hoặc chắc chắn có thể không phản ánh khác biệt giữa từng người và điều kiện sử dụng.",suggest:"Mô tả vai trò hỗ trợ, điều kiện sử dụng và tính biến thiên của kết quả; chỉ nêu thời gian khi có dữ liệu phù hợp."},
+ {re:/lợi nhuận.{0,20}(cam kết|đảm bảo)|không rủi ro|không thể thua lỗ|thu nhập chắc chắn|lãi suất đảm bảo/gi,cat:"Cam kết tài chính",sev:"high",why:"Nội dung có thể làm người đọc đánh giá thấp rủi ro hoặc hiểu lợi nhuận là chắc chắn.",suggest:"Trình bày rõ rủi ro, điều kiện, phí và giả định; không bảo đảm lợi nhuận nếu không có cơ sở hợp lệ."},
+ {re:/duy nhất|số lượng có hạn|chỉ hôm nay|ưu đãi cuối cùng|giá gốc|rẻ nhất|giá sập sàn/gi,cat:"Tạo khan hiếm / khuyến mãi",sev:"medium",why:"Thông tin khan hiếm hoặc giảm giá cần đúng thực tế và có thời hạn, điều kiện cụ thể (đặc biệt bị quét gắt trên TikTok Shop).",suggest:"Ghi rõ thời hạn, số lượng, giá áp dụng và điều kiện chương trình; chỉ dùng thông tin khan hiếm khi có thật."},
+ {re:/được chuyên gia khuyên dùng|bác sĩ khuyên dùng|được chứng nhận|đã kiểm nghiệm|nghiên cứu chứng minh/gi,cat:"Dẫn chứng cần xác minh",sev:"medium",why:"Việc viện dẫn chuyên gia, chứng nhận hoặc nghiên cứu cần xác định được đơn vị, tài liệu và phạm vi chứng minh.",suggest:"Bổ sung tên tổ chức, tài liệu, thời điểm và phạm vi chứng nhận/nghiên cứu; không sử dụng nếu chưa xác minh."},
+ {re:/miễn phí|hoàn tiền|bảo hành|giảm giá|sale|inbox|nhắn tin ngay/gi,cat:"Điều kiện thương mại / điều hướng",sev:"low",why:"Thông tin ưu đãi hoặc kêu gọi hành động cần rõ ràng điều kiện, tránh vi phạm chính sách điều hướng ngoài nền tảng.",suggest:"Bổ sung thời hạn, đối tượng, điều kiện và các giới hạn quan trọng của chương trình."}
+];
+
+function analyze(text){
+ let issues=[], score=8;
+ const mult=strictMode==="google"?1.35:strictMode==="tiktok"?1.2:1.0;
+
+ patterns.forEach(p=>{
+   let matches=[...text.matchAll(p.re)];
+   matches.forEach(m=>{
+     let phrase=m[0];
+     if(!issues.some(x=>x.phrase.toLowerCase()===phrase.toLowerCase())){
+       let sev=p.sev;
+       if(strictMode==="google" && sev==="medium") sev="high";
+       if(strictMode==="tiktok" && /khan hiếm|thương mại/i.test(p.cat)) sev="high";
+       issues.push({phrase,cat:p.cat,sev,why:p.why,suggest:p.suggest});
+       score+=Math.round((sev==="high"?23:sev==="medium"?13:5)*mult);
+     }
+   });
+ });
+
+ const sector=$("industry").value;
+ if(/sức khỏe|thực phẩm bổ sung|mỹ phẩm/i.test(sector)&&!/không có tác dụng phụ|khỏi bệnh|chữa khỏi/i.test(text)){
+   if(/trị|điều trị|chữa|giảm đau|tăng cường miễn dịch/i.test(text)){
+     issues.push({phrase:"Tuyên bố công dụng liên quan sức khỏe",cat:"Công dụng cần căn cứ",sev:"medium",why:"Công dụng liên quan sức khỏe nên được đối chiếu với hồ sơ, bằng chứng và quy định áp dụng cho đúng loại sản phẩm.",suggest:"Sử dụng đúng nội dung công dụng được phép công bố và lưu giữ tài liệu chứng minh."});
+     score+=Math.round(13*mult);
+   }
+ }
+ if(text.length>100&&!/[0-9]+%|nguồn|điều kiện|áp dụng|theo|lưu ý/i.test(text)){
+   issues.push({phrase:"Thiếu thông tin xác minh / khuyến cáo",cat:"Minh bạch thông tin",sev:"low",why:"Nội dung có tuyên bố về sản phẩm nhưng chưa thấy nguồn, điều kiện hoặc lưu ý phạm vi áp dụng.",suggest:"Cân nhắc bổ sung nguồn, điều kiện sử dụng hoặc câu lưu ý tùy thuộc cơ địa/điều kiện thực tế."});
+   score+=5;
+ }
+ score=Math.min(100,score);
+
+ let rewritten=text;
+ const replacements=[
+   [/100%/gi,"có thể hỗ trợ"],
+   [/cam kết tuyệt đối/gi,"hướng tới"],
+   [/chắc chắn thành công/gi,"có thể hỗ trợ đạt mục tiêu"],
+   [/khỏi bệnh hoàn toàn|chữa khỏi|trị dứt điểm/gi,"hỗ trợ chăm sóc sức khỏe"],
+   [/không có tác dụng phụ/gi,"cần tìm hiểu kỹ thông tin an toàn và hướng dẫn sử dụng"],
+   [/không rủi ro|không thể thua lỗ/gi,"có những rủi ro cần cân nhắc"],
+   [/tốt nhất thị trường|số 1 việt nam|số 1/gi,"một lựa chọn đáng cân nhắc"],
+   [/trắng da tức thì/gi,"hỗ trợ dưỡng sáng da theo liệu trình"],
+   [/giảm cân cấp tốc/gi,"hỗ trợ kiểm soát cân nặng kết hợp chế độ ăn uống"],
+   [/giá sập sàn|rẻ nhất/gi,"mức giá ưu đãi trong chương trình"]
+ ];
+ replacements.forEach(([a,b])=>rewritten=rewritten.replace(a,b));
+ if(rewritten===text) rewritten=text+"\n\n*Lưu ý: Hiệu quả sử dụng tùy thuộc vào cơ địa và điều kiện áp dụng thực tế của từng khách hàng.";
+ const evidence=$("evidence").value.trim();
+ if(evidence) rewritten+="\n\nThông tin xác minh: "+evidence;
+ return {score,issues,rewritten,original:text,strictMode,level:score>=71?"Rủi ro rất cao":score>=41?"Rủi ro cao":score>=21?"Cần chú ý":"An toàn / Rủi ro thấp"};
+}
+
+function toast(msg){$("toast").textContent=msg;$("toast").classList.add("show");setTimeout(()=>$("toast").classList.remove("show"),2600)}
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+
+/* HỆ THỐNG ĐIỂM THƯỞNG */
+function getPoints(){return parseInt(localStorage.getItem("adcheck_points")||"0",10)}
+function addPoints(pts, reason){
+  const cur=getPoints()+pts;
+  localStorage.setItem("adcheck_points",String(cur));
+  renderRewards();
+  if(reason) toast(`🏆 +${pts} điểm: ${reason}`);
+}
+function renderRewards(){
+  const pts=getPoints();
+  $("topPoints").textContent=pts;
+  $("homePoints").textContent=pts;
+  let rank={level:"CẤP 1",icon:"🌱",title:"Người mới minh bạch",min:0,max:50};
+  if(pts>=300) rank={level:"CẤP 4",icon:"👑",title:"Đại sứ Quảng cáo Sạch",min:300,max:500};
+  else if(pts>=150) rank={level:"CẤP 3",icon:"🛡️",title:"Chuyên gia Kiểm duyệt",min:150,max:300};
+  else if(pts>=50) rank={level:"CẤP 2",icon:"⭐",title:"Người sáng tạo Chuẩn mực",min:50,max:150};
+  $("rankBadge").textContent=rank.level;
+  $("rankIcon").textContent=rank.icon;
+  $("rankTitle").textContent=rank.title;
+  const pct=pts>=300?100:Math.min(100,Math.round(((pts-rank.min)/(rank.max-rank.min))*100));
+  $("rankProgress").style.width=Math.max(8,pct)+"%";
+  $("rankNext").textContent=pts>=300?"Bạn đã đạt cấp bậc cao nhất!":`Còn ${rank.max-pts} điểm để lên hạng tiếp theo`;
+}
+
+/* RENDER KẾT QUẢ & SO SÁNH TRƯỚC/SAU */
+function highlightPhrases(text, issues){
+  let safeHtml=esc(text);
+  issues.forEach(item=>{
+    if(!item.phrase || item.phrase.length>60) return;
+    const escapedPhrase=esc(item.phrase).replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+    safeHtml=safeHtml.replace(new RegExp(`(${escapedPhrase})`,'gi'),'<span class="hl-risk">$1</span>');
+  });
+  return safeHtml;
+}
+
+function renderResult(r){
+ lastResult=r;$("emptyState").style.display="none";$("resultBox").style.display="block";$("recommendPanel").style.display="block";$("detailsPanel").style.display="block";$("comparePanel").style.display="block";$("aiChatPanel").style.display="block";
+ $("scoreNum").textContent=r.score;$("riskLabel").textContent=r.level;
+ $("riskDesc").textContent=r.issues.length?`Phát hiện ${r.issues.length} dấu hiệu cần xem xét. Hãy đọc giải thích và đối chiếu với bằng chứng thực tế.`:"Tuyệt vời! Nội dung minh bạch, đạt ngưỡng an toàn để đăng tải.";
+ let color=r.score>=41?"var(--red)":r.score>=21?"var(--amber)":"var(--green)";
+ $("scoreRing").style.background=`conic-gradient(${color} ${r.score*3.6}deg, var(--line) 0deg)`;
+ $("highCount").textContent=r.issues.filter(x=>x.sev==="high").length;$("midCount").textContent=r.issues.filter(x=>x.sev==="medium").length;$("lowCount").textContent=r.issues.filter(x=>x.sev==="low").length;
+ $("rewriteText").textContent=r.rewritten;
+ $("beforeCompareText").innerHTML=highlightPhrases(r.original || $("adText").value, r.issues);
+ $("afterCompareText").textContent=r.rewritten;
+ $("issueSummary").textContent=`${r.issues.length} dấu hiệu được ghi nhận`;
+ $("issueList").innerHTML=r.issues.length?r.issues.map(x=>`<article class="issue ${x.sev}"><div class="issue-top"><div class="issue-title">${esc(x.cat)}</div><span class="severity ${x.sev}">${x.sev==="high"?"NGUY CƠ CAO":x.sev==="medium"?"CẦN XEM XÉT":"GỢI Ý"}</span></div><div class="quote">“${esc(x.phrase)}”</div><p><b>Vì sao cần chú ý:</b> ${esc(x.why)}</p><p><b>Đề xuất:</b> ${esc(x.suggest)}</p></article>`).join(""):'<div class="history-empty">🎉 Không phát hiện dấu hiệu rủi ro nào. Nội dung của bạn đạt tiêu chuẩn an toàn!</div>';
+
+ // Cập nhật lời chào trợ lý ảo theo kết quả mới
+ $("aiChatMsgs").innerHTML=`<div class="msg-ai">Tôi đã phân tích xong bài viết (Điểm rủi ro: <b>${r.score}/100</b>). ${r.issues.length?`Có <b>${r.issues.length}</b> điểm cần lưu ý. Bạn muốn tôi giải thích chi tiết hay viết lại tiêu đề hấp dẫn hơn?`:"Nội dung rất an toàn! Bạn có muốn tôi gợi ý thêm vài biến thể tiêu đề để chạy A/B Testing không?"}</div>`;
+}
+
+/* TRỢ LÝ ẢO TƯ VẤN CÂU CHỮ */
+function replyAiChat(question){
+  if(!lastResult) return;
+  const msgs=$("aiChatMsgs");
+  msgs.innerHTML+=`<div class="msg-user">${esc(question)}</div>`;
+  const q=question.toLowerCase();
+  const prod=$("product").value.trim()||"sản phẩm";
+  let ans="";
+  if(q.includes("tại sao") || q.includes("rủi ro") || q.includes("lỗi")){
+    if(!lastResult.issues.length) ans=`Bài viết của bạn hiện đạt <b>${lastResult.score}/100 điểm</b> (mức An toàn) vì không chứa từ ngữ cam kết tuyệt đối hay phóng đại công dụng.`;
+    else ans=`Hệ thống đánh dấu <b>${lastResult.issues.length} cụm từ</b> (${lastResult.issues.map(x=>`“${esc(x.phrase)}”`).join(", ")}). Các nền tảng như Facebook/TikTok thường hạn chế phân phối hoặc từ chối duyệt các nội dung hứa hẹn kết quả chắc chắn 100% mà thiếu điều kiện đi kèm.`;
+  }else if(q.includes("tiêu đề") || q.includes("gợi ý") || q.includes("viết lại")){
+    ans=`Dưới đây là 3 gợi ý tiêu đề thu hút nhưng vẫn chuẩn mực cho <b>${esc(prod)}</b>:<br>
+    1. <i>“Trải nghiệm giải pháp hỗ trợ chăm sóc cùng ${esc(prod)} – Minh bạch & Lành tính”</i><br>
+    2. <i>“Vì sao nhiều khách hàng tin chọn ${esc(prod)} trong liệu trình hằng ngày?”</i><br>
+    3. <i>“Khám phá bí quyết tối ưu hiệu quả cùng ${esc(prod)} (Kèm hướng dẫn chi tiết)”</i>`;
+  }else if(q.includes("miễn trừ") || q.includes("disclaimer")){
+    const sec=$("industry").value;
+    if(/sức khỏe|thực phẩm/i.test(sec)) ans=`Với ngành Sức khỏe/TPBVSK, bạn bắt buộc nên thêm cuối bài: <i>“Thực phẩm này không phải là thuốc và không có tác dụng thay thế thuốc chữa bệnh. Hiệu quả tùy thuộc cơ địa mỗi người.”</i>`;
+    else if(/tài chính/i.test(sec)) ans=`Với ngành Tài chính, nên bổ sung: <i>“Thông tin mang tính tham khảo. Lợi suất thực tế phụ thuộc vào điều khoản hợp đồng và biến động thị trường.”</i>`;
+    else ans=`Bạn nên thêm câu lưu ý ngắn gọn ở cuối bài: <i>“*Lưu ý: Kết quả thực tế có thể khác nhau tùy thuộc vào điều kiện sử dụng của từng khách hàng.”</i>`;
+  }else{
+    ans=`Dựa trên nội dung hiện tại (${lastResult.score}/100 điểm), lời khuyên tốt nhất là giữ lại các lợi ích cốt lõi của <b>${esc(prod)}</b>, thay thế từ ngữ tuyệt đối bằng cụm từ <i>“hỗ trợ”, “góp phần”</i> và nêu rõ điều kiện ưu đãi nếu có.`;
+  }
+  setTimeout(()=>{
+    msgs.innerHTML+=`<div class="msg-ai">${ans}</div>`;
+    msgs.scrollTop=msgs.scrollHeight;
+  },250);
+}
+$("aiChatForm").addEventListener("submit",e=>{
+  e.preventDefault();
+  const val=$("aiChatInput").value.trim();
+  if(!val) return;
+  $("aiChatInput").value="";
+  replyAiChat(val);
+});
+document.querySelectorAll(".ai-chip").forEach(btn=>btn.addEventListener("click",()=>replyAiChat(btn.dataset.q)));
+
+/* CHIA SẺ NHANH QUA LINK / QR CODE */
+$("shareQrBtn").addEventListener("click",()=>{
+  if(!lastResult){toast("Hãy phân tích nội dung trước khi tạo mã chia sẻ.");return}
+  const prod=$("product").value.trim()||"Quảng cáo chưa đặt tên";
+  const summary=`AdCheck AI | ${prod} | Rủi ro: ${lastResult.score}/100 (${lastResult.level})`;
+  const payload=btoa(unescape(encodeURIComponent(JSON.stringify({p:prod,s:lastResult.score,l:lastResult.level,t:(lastResult.original||"").slice(0,180)}))));
+  const shareUrl=`${location.origin}${location.pathname}#report=${payload}`;
+  $("shareSummaryText").innerHTML=`<b>${esc(prod)}</b> · Điểm rủi ro: <b>${lastResult.score}/100</b> (${esc(lastResult.level)})`;
+  $("shareLinkInput").value=shareUrl;
+  $("qrCodeImg").src=`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(summary+" - "+shareUrl)}`;
+  $("shareModal").classList.add("open");
+});
+$("closeShareModal").addEventListener("click",()=>$("shareModal").classList.remove("open"));
+$("copyShareLinkBtn").addEventListener("click",async()=>{
+  try{await navigator.clipboard.writeText($("shareLinkInput").value);toast("Đã sao chép liên kết báo cáo!");}
+  catch{toast("Không thể sao chép tự động");}
+});
+
+/* MINI-GAME SĂN TỪ KHÓA PHẠM QUY */
+const quizBank=[
+  {q:"“Kem dưỡng trắng da thần tốc, cam kết bật 3 tông chỉ sau 1 đêm, hoàn tiền 100% nếu không trắng!”",opts:["Cam kết tuyệt đối & Hiệu quả phóng đại","Vi phạm bản quyền âm nhạc","Thiếu thông tin địa chỉ cửa hàng"],ans:0,exp:"Các cụm từ 'thần tốc', 'sau 1 đêm' và 'cam kết... 100%' là tuyên bố phóng đại, dễ bị từ chối duyệt trên mọi nền tảng."},
+  {q:"“Khóa học đầu tư chứng khoán bao lời, lợi nhuận cam kết 30%/tháng, tuyệt đối không bao giờ thua lỗ.”",opts:["Lỗi chính tả cơ bản","Cam kết tài chính & Che giấu rủi ro","Dùng sai kích thước ảnh"],ans:1,exp:"Quảng cáo tài chính nghiêm cấm việc cam kết lợi nhuận chắc chắn hoặc khẳng định 'không rủi ro'."},
+  {q:"“Viên uống thảo mộc ABC chữa dứt điểm bệnh tiểu đường và huyết áp cao, thay thế hoàn toàn thuốc tây.”",opts:["Tuyên bố sức khỏe nhạy cảm / chữa bệnh","Khuyến mãi chưa ghi ngày kết thúc","Thiếu hashtag thương hiệu"],ans:0,exp:"Thực phẩm bảo vệ sức khỏe không được phép quảng cáo có tác dụng 'chữa dứt điểm' hay 'thay thế thuốc chữa bệnh'."},
+  {q:"“Giảm giá SỐC 70% toàn bộ cửa hàng! Duy nhất hôm nay!” (Nhưng không ghi ngày tháng hay sản phẩm áp dụng)",opts:["Thiếu điều kiện thương mại & tạo khan hiếm ảo","Vi phạm quyền riêng tư cá nhân","Sử dụng từ ngữ địa phương"],ans:0,exp:"Thông tin khuyến mãi cần nêu rõ thời gian cụ thể, phạm vi sản phẩm và điều kiện áp dụng để tránh gây hiểu nhầm."},
+  {q:"“Sản phẩm được 100% bác sĩ đầu ngành khuyên dùng” (Không nêu tên tổ chức, tài liệu hay số liệu kiểm chứng)",opts:["Dẫn chứng chuyên gia chưa xác minh","Lỗi định dạng phông chữ","Quảng cáo sai khung giờ"],ans:0,exp:"Khi viện dẫn 'bác sĩ khuyên dùng' hoặc 'nghiên cứu chứng minh', cần có tên đơn vị và tài liệu xác thực đi kèm."}
+];
+let quizIdx=0, quizSessionScore=0, quizAnswered=false;
+function renderQuiz(){
+  quizAnswered=false;
+  const item=quizBank[quizIdx];
+  $("quizProgressTitle").textContent=`Câu hỏi ${quizIdx+1} / ${quizBank.length}`;
+  $("quizScoreBadge").textContent=`ĐIỂM PHIÊN NÀY: ${quizSessionScore}`;
+  $("quizQuestionText").textContent=item.q;
+  $("quizExplain").style.display="none";
+  $("nextQuizBtn").classList.add("hidden");
+  $("quizOptions").innerHTML=item.opts.map((opt,i)=>`<button type="button" class="quiz-opt" onclick="answerQuiz(${i})"><span>${String.fromCharCode(65+i)}. ${esc(opt)}</span><span>➔</span></button>`).join("");
+}
+window.answerQuiz=idx=>{
+  if(quizAnswered) return;
+  quizAnswered=true;
+  const item=quizBank[quizIdx];
+  const btns=document.querySelectorAll(".quiz-opt");
+  btns.forEach((b,i)=>{
+    b.disabled=true;
+    if(i===item.ans) b.classList.add("correct");
+    else if(i===idx) b.classList.add("wrong");
+  });
+  const ex=$("quizExplain");
+  ex.style.display="block";
+  if(idx===item.ans){
+    quizSessionScore+=15;
+    $("quizScoreBadge").textContent=`ĐIỂM PHIÊN NÀY: ${quizSessionScore}`;
+    ex.innerHTML=`<b style="color:var(--green)">🎉 Chính xác!</b> ${esc(item.exp)}`;
+    playSound("win");
+    addPoints(15,"Trả lời đúng thử thách săn lỗi!");
+  }else{
+    ex.innerHTML=`<b style="color:var(--red)">❌ Chưa chính xác!</b> ${esc(item.exp)}`;
+    playSound("warn");
+  }
+  $("nextQuizBtn").textContent=quizIdx<quizBank.length-1?"Câu tiếp theo ➔":"Chơi lại từ đầu ↻";
+  $("nextQuizBtn").classList.remove("hidden");
+};
+$("nextQuizBtn").addEventListener("click",()=>{
+  quizIdx=(quizIdx+1)%quizBank.length;
+  if(quizIdx===0) quizSessionScore=0;
+  renderQuiz();
+});
+
+/* LỊCH SỬ, TÌM KIẾM & BIỂU ĐỒ THỐNG KÊ */
+function getHistory(){try{return JSON.parse(localStorage.getItem("adcheck_history")||"[]")}catch{return []}}
+function saveHistory(item){let h=getHistory();h.unshift(item);h=h.slice(0,50);localStorage.setItem("adcheck_history",JSON.stringify(h));renderHistory()}
+
+function renderStatsAndChart(h){
+  const total=h.length;
+  const safe=h.filter(x=>x.score<=20).length;
+  const warn=h.filter(x=>x.score>=21 && x.score<=40).length;
+  const high=h.filter(x=>x.score>=41).length;
+  $("totalStat").textContent=total;
+  $("safeStat").textContent=safe;
+  $("flagStat").textContent=warn+high;
+
+  const pSafe=total?Math.round((safe/total)*100):0;
+  const pWarn=total?Math.round((warn/total)*100):0;
+  const pHigh=total?Math.round((high/total)*100):0;
+
+  $("chartSafeLabel").textContent=`${safe} (${pSafe}%)`;
+  $("chartWarnLabel").textContent=`${warn} (${pWarn}%)`;
+  $("chartHighLabel").textContent=`${high} (${pHigh}%)`;
+  $("barSafe").style.width=pSafe+"%";
+  $("barWarn").style.width=pWarn+"%";
+  $("barHigh").style.width=pHigh+"%";
+  $("chartEmptyNote").style.display=total?"none":"block";
+}
+
+function renderHistory(){
+  let h=getHistory();
+  renderStatsAndChart(h);
+  const query=($("historySearch")?.value||"").trim().toLowerCase();
+  const filter=$("historyFilter")?.value||"all";
+  let filtered=h.map((item,idx)=>({...item,_idx:idx})).filter(x=>{
+    const matchText=!query || (x.product||"").toLowerCase().includes(query) || (x.text||"").toLowerCase().includes(query) || (x.industry||"").toLowerCase().includes(query);
+    let matchLevel=true;
+    if(filter==="safe") matchLevel=x.score<=20;
+    else if(filter==="warn") matchLevel=x.score>=21 && x.score<=40;
+    else if(filter==="danger") matchLevel=x.score>=41;
+    return matchText && matchLevel;
+  });
+
+  if(!filtered.length){
+    $("historyList").className="history-empty";
+    $("historyList").textContent=h.length?"Không tìm thấy kết quả phù hợp với bộ lọc.":"Chưa có lịch sử. Hãy thực hiện lần kiểm tra đầu tiên.";
+    return;
+  }
+  $("historyList").className="";
+  $("historyList").innerHTML=filtered.map(x=>{
+    const badgeCls=x.score<=20?"safe":x.score>=41?"danger":"";
+    return `<div class="history-item"><div style="min-width:0"><b>${esc(x.product||x.text.slice(0,90))}</b><small>${new Date(x.date).toLocaleString("vi-VN")} · ${esc(x.platform||"")} · ${esc(x.level)}</small></div><div class="history-actions"><span class="history-score ${badgeCls}">${x.score}/100</span><button class="icon-btn" style="width:32px;height:32px" onclick="loadHistory(${x._idx})" title="Xem lại">↗</button></div></div>`;
+  }).join("");
+}
+
+$("historySearch").addEventListener("input",renderHistory);
+$("historyFilter").addEventListener("change",renderHistory);
+
+window.loadHistory=i=>{let x=getHistory()[i];$("product").value=x.product||"";$("adText").value=x.text;$("industry").value=x.industry||"";$("platform").value=x.platform||"Facebook";$("charCount").textContent=x.text.length+" / 5.000";renderResult(x.result);showPage("checker");document.querySelector('[data-mode="textMode"]').click();document.querySelector("#checker").scrollIntoView({behavior:"smooth"});toast("Đã tải lại kết quả trong lịch sử")};
+
+$("adText").addEventListener("input",e=>$("charCount").textContent=e.target.value.length+" / 5.000");
+
+$("analyzeBtn").addEventListener("click",()=>{
+  let text=$("adText").value.trim();
+  if(!text){toast("Vui lòng nhập nội dung quảng cáo trước.");$("adText").focus();return}
+  let btn=$("analyzeBtn");btn.disabled=true;btn.textContent="◌ Đang phân tích...";
+  setTimeout(()=>{
+    let r=analyze(text);
+    renderResult(r);
+    saveHistory({product:$("product").value.trim(),text,industry:$("industry").value,platform:$("platform").value,score:r.score,level:r.level,date:new Date().toISOString(),result:r});
+    btn.disabled=false;btn.textContent="✦ Phân tích nội dung";
+
+    if(r.score<=20){
+      launchConfetti();
+      playSound("win");
+    }else{
+      playSound("warn");
+    }
+
+    if(lastAnalyzedScore!==null && lastAnalyzedScore>20 && r.score<=20){
+      addPoints(25,"Cải thiện nội dung rủi ro thành an toàn!");
+    }else{
+      addPoints(10,"Hoàn thành kiểm tra nội dung quảng cáo");
+    }
+    lastAnalyzedScore=r.score;
+    $("resultBox").scrollIntoView({behavior:"smooth",block:"nearest"});
+  },550);
+});
+
+$("applyRewriteBtn").addEventListener("click",()=>{
+  if(!lastResult)return;
+  $("adText").value=lastResult.rewritten;
+  $("charCount").textContent=$("adText").value.length+" / 5.000";
+  $("analyzeBtn").click();
+});
+
+$("clearBtn").addEventListener("click",()=>{$("product").value="";$("industry").value="";$("adText").value="";$("evidence").value="";$("charCount").textContent="0 / 5.000";lastAnalyzedScore=null;toast("Đã xóa nội dung nhập")});
+$("copyRewrite").addEventListener("click",async()=>{try{await navigator.clipboard.writeText(lastResult.rewritten);toast("Đã sao chép nội dung đề xuất")}catch{toast("Trình duyệt không cho phép sao chép tự động")}});
+$("clearHistory").addEventListener("click",()=>{if(confirm("Bạn có chắc muốn xóa toàn bộ lịch sử trên thiết bị này?")){localStorage.removeItem("adcheck_history");renderHistory();toast("Đã xóa lịch sử")}});
+
+/* XUẤT BÁO CÁO PDF CHUYÊN NGHIỆP */
+function exportReportPDF(reportData, meta){
+  if(!reportData){toast("Chưa có dữ liệu báo cáo để xuất PDF.");return}
+  if(!window.html2pdf){toast("Đang tải trình tạo PDF, vui lòng thử lại sau giây lát.");return}
+  const color=reportData.score>=41?"#e65362":reportData.score>=21?"#e99a27":"#1b9b68";
+  const el=document.createElement("div");
+  el.style.cssText="padding:28px;font-family:Arial,sans-serif;color:#17233d;background:#fff;line-height:1.55";
+  el.innerHTML=`
+    <div style="display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid #3867f5;padding-bottom:14px;margin-bottom:20px">
+      <div><h1 style="margin:0;font-size:22px;color:#3867f5">BÁO CÁO KIỂM TRA QUẢNG CÁO</h1><div style="font-size:12px;color:#6c7891">Hệ thống sàng lọc minh bạch nội dung AdCheck AI</div></div>
+      <div style="text-align:right;font-size:11px;color:#6c7891">Ngày xuất: ${new Date().toLocaleString("vi-VN")}</div>
+    </div>
+    <table style="width:100%;border-collapse:collapse;margin-bottom:18px;font-size:12px">
+      <tr><td style="padding:7px;border:1px solid #e6ebf4;background:#f5f8ff;width:28%"><b>Sản phẩm / Dịch vụ</b></td><td style="padding:7px;border:1px solid #e6ebf4">${esc(meta.product||"Chưa đặt tên")}</td></tr>
+      <tr><td style="padding:7px;border:1px solid #e6ebf4;background:#f5f8ff"><b>Lĩnh vực & Nền tảng</b></td><td style="padding:7px;border:1px solid #e6ebf4">${esc(meta.industry||"Chung")} · ${esc(meta.platform||"Đa nền tảng")}</td></tr>
+      <tr><td style="padding:7px;border:1px solid #e6ebf4;background:#f5f8ff"><b>Điểm đánh giá rủi ro</b></td><td style="padding:7px;border:1px solid #e6ebf4"><b style="color:${color};font-size:14px">${reportData.score}/100 — ${esc(reportData.level)}</b></td></tr>
+    </table>
+    <h3 style="font-size:14px;margin:14px 0 6px;color:#17233d">1. Nội dung quảng cáo gốc</h3>
+    <div style="background:#f8fafc;border:1px solid #e2e8f0;padding:12px;border-radius:8px;font-size:12px;white-space:pre-line">${esc(meta.text)}</div>
+    <h3 style="font-size:14px;margin:16px 0 6px;color:#17233d">2. Chi tiết các điểm cần lưu ý (${reportData.issues.length})</h3>
+    ${reportData.issues.length?reportData.issues.map((x,i)=>`<div style="border-left:3px solid ${x.sev==='high'?'#e65362':'#e99a27'};padding:8px 12px;margin-bottom:8px;background:#fffaf5;font-size:12px"><b>${i+1}. ${esc(x.cat)}:</b> “${esc(x.phrase)}”<br><span style="color:#475569">Lý do: ${esc(x.why)}</span><br><span style="color:#0f766e">Gợi ý: ${esc(x.suggest)}</span></div>`).join(""):'<p style="font-size:12px;color:#1b9b68">Không phát hiện cụm từ rủi ro theo bộ quy tắc.</p>'}
+    <h3 style="font-size:14px;margin:16px 0 6px;color:#17233d">3. Phiên bản đề xuất chỉnh sửa</h3>
+    <div style="background:#eff6ff;border:1px solid #bfdbfe;padding:12px;border-radius:8px;font-size:12px;white-space:pre-line">${esc(reportData.rewritten)}</div>
+    <div style="margin-top:24px;padding-top:10px;border-top:1px solid #e6ebf4;font-size:10px;color:#6c7891;text-align:center">Tài liệu được tạo tự động bởi AdCheck AI · Kết quả mang tính chất tham khảo hỗ trợ rà soát nội bộ.</div>
+  `;
+  toast("Đang tạo file PDF...");
+  html2pdf().set({margin:10,filename:`Bao-cao-AdCheck-${Date.now()}.pdf`,image:{type:'jpeg',quality:0.98},html2canvas:{scale:2},jsPDF:{unit:'mm',format:'a4',orientation:'portrait'}}).from(el).save().then(()=>toast("📥 Đã tải xuống báo cáo PDF!"));
+}
+
+$("exportPdfBtn").addEventListener("click",()=>{
+  exportReportPDF(lastResult,{product:$("product").value,industry:$("industry").value,platform:$("platform").value,text:$("adText").value});
+});
+$("exportHistoryPdfBtn").addEventListener("click",()=>{
+  const h=getHistory();
+  if(!h.length){toast("Chưa có lịch sử kiểm tra để xuất PDF.");return}
+  exportReportPDF(h[0].result,h[0]);
+});
+$("exportBtn").addEventListener("click",()=>{if(!lastResult){toast("Hãy phân tích nội dung trước khi xuất báo cáo.");return}let txt=`BÁO CÁO KIỂM TRA NỘI DUNG QUẢNG CÁO — ADCHECK AI\nThời gian: ${new Date().toLocaleString("vi-VN")}\nSản phẩm: ${$("product").value}\nLĩnh vực: ${$("industry").value}\nNền tảng: ${$("platform").value}\n\nNỘI DUNG GỐC:\n${$("adText").value}\n\nĐIỂM RỦI RO: ${lastResult.score}/100 — ${lastResult.level}\n\nCÁC ĐIỂM CẦN CHÚ Ý:\n${lastResult.issues.map((x,i)=>`${i+1}. ${x.cat} (${x.sev})\nCụm từ: ${x.phrase}\nLý do: ${x.why}\nĐề xuất: ${x.suggest}`).join("\n\n")||"Không phát hiện dấu hiệu theo bộ quy tắc demo."}\n\nĐỀ XUẤT NỘI DUNG:\n${lastResult.rewritten}\n\nLưu ý: Kết quả demo chỉ mang tính tham khảo, không phải kết luận pháp lý.`;let blob=new Blob([txt],{type:"text/plain;charset=utf-8"});let a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="bao-cao-adcheck-ai.txt";a.click();URL.revokeObjectURL(a.href);toast("Đã xuất báo cáo TXT")});
+
+/* CHECKLIST TRƯỚC KHI ĐĂNG */
+const checklistData=[
+  {id:"c1",title:"Loại bỏ các từ ngữ khẳng định tuyệt đối",desc:"Đã thay thế các từ như '100%', 'tốt nhất', 'số 1', 'chắc chắn khỏi' nếu chưa có văn bản chứng minh."},
+  {id:"c2",title:"Đầy đủ giấy phép / số công bố sản phẩm",desc:"Với mỹ phẩm, thực phẩm chức năng, y tế: đã kiểm tra số phiếu công bố và giấy xác nhận nội dung quảng cáo."},
+  {id:"c3",title:"Rõ ràng điều kiện khuyến mãi & giá bán",desc:"Đã ghi rõ thời gian áp dụng, số lượng giới hạn, điều kiện nhận ưu đãi hoặc hoàn tiền."},
+  {id:"c4",title:"Hình ảnh & video trung thực",desc:"Không dùng ảnh trước-sau (before-after) gây hiểu nhầm hoặc cắt ghép hình ảnh bác sĩ, người nổi tiếng trái phép."},
+  {id:"c5",title:"Tuân thủ chính sách nền tảng đăng tải",desc:"Đã đối chiếu quy định riêng của Facebook Ads, TikTok Ads, Google hoặc sàn TMĐT về từ khóa bị hạn chế."},
+  {id:"c6",title:"Có câu khuyến cáo cần thiết (Disclaimer)",desc:"Ví dụ: 'Sản phẩm này không phải là thuốc...', 'Hiệu quả tùy thuộc vào cơ địa mỗi người'."},
+  {id:"c7",title:"Thông tin liên hệ & xuất xứ minh bạch",desc:"Hiển thị rõ tên thương hiệu, đơn vị chịu trách nhiệm sản phẩm và kênh hỗ trợ khách hàng."},
+  {id:"c8",title:"Đã kiểm tra lại bằng AdCheck AI",desc:"Điểm rủi ro sau chỉnh sửa đạt mức An toàn (dưới 20 điểm)."}
+];
+function getChecklistState(){try{return JSON.parse(localStorage.getItem("adcheck_checklist")||"{}")}catch{return {}}}
+function renderChecklist(){
+  const state=getChecklistState();
+  let doneCount=0;
+  $("checklistContainer").innerHTML=checklistData.map(item=>{
+    const checked=!!state[item.id];
+    if(checked) doneCount++;
+    return `<label class="checklist-item ${checked?'done':''}"><input type="checkbox" data-cid="${item.id}" ${checked?'checked':''}><div><b style="font-size:13px;display:block;margin-bottom:3px">${item.title}</b><span style="font-size:12px;color:var(--muted)">${item.desc}</span></div></label>`;
+  }).join("");
+  const pct=Math.round((doneCount/checklistData.length)*100);
+  $("checklistStatusText").textContent=`Đã hoàn thành ${doneCount} / ${checklistData.length} tiêu chí (${pct}%)`;
+  $("checklistProgress").style.width=pct+"%";
+  document.querySelectorAll("[data-cid]").forEach(cb=>cb.addEventListener("change",e=>{
+    const st=getChecklistState();
+    st[e.target.dataset.cid]=e.target.checked;
+    localStorage.setItem("adcheck_checklist",JSON.stringify(st));
+    renderChecklist();
+    const allDone=checklistData.every(x=>st[x.id]);
+    if(allDone && !localStorage.getItem("adcheck_checklist_rewarded")){
+      localStorage.setItem("adcheck_checklist_rewarded","1");
+      launchConfetti();playSound("win");
+      addPoints(15,"Hoàn thành 100% Checklist trước khi đăng!");
+    }
+  }));
+}
+$("resetChecklistBtn").addEventListener("click",()=>{
+  localStorage.removeItem("adcheck_checklist");
+  localStorage.removeItem("adcheck_checklist_rewarded");
+  renderChecklist();
+  toast("Đã đặt lại danh sách kiểm tra");
+});
+
+/* THƯ VIỆN MẪU QUẢNG CÁO AN TOÀN */
+const templatesData=[
+  {cat:"Mỹ phẩm & làm đẹp",title:"Serum cấp ẩm phục hồi da",product:"Serum HA B5 PureSkin",text:"Làn da khô căng sau ngày dài làm việc? Serum HA B5 PureSkin hỗ trợ cấp ẩm sâu và làm dịu bề mặt da nhờ phức hợp Hyaluronic Acid đa phân tử kết hợp Vitamin B5.\n\n• Kết cấu mỏng nhẹ, thấm nhanh, phù hợp cho cả làn da nhạy cảm.\n• Đã được kiểm nghiệm da liễu về độ lành tính.\n*Lưu ý: Hiệu quả dưỡng ẩm và phục hồi tùy thuộc vào tình trạng da của mỗi người."},
+  {cat:"Sức khỏe & thực phẩm bổ sung",title:"TPBVSK Hỗ trợ tiêu hóa",product:"Men vi sinh BioGut",text:"Bổ sung lợi khuẩn mỗi ngày giúp hệ tiêu hóa hoạt động nhẹ nhàng hơn. TPBVSK BioGut cung cấp 5 tỷ lợi khuẩn hỗ trợ cân bằng hệ vi sinh đường ruột và giảm cảm giác đầy bụng, khó tiêu.\n\n• Phù hợp cho người lớn và trẻ em từ 6 tuổi trở lên.\n• Thực phẩm này không phải là thuốc và không có tác dụng thay thế thuốc chữa bệnh."},
+  {cat:"Tài chính & đầu tư",title:"Gói tích lũy linh hoạt",product:"Tích Lũy Thông Minh SmartSave",text:"Xây dựng quỹ dự phòng tài chính chủ động với gói Tích Lũy Thông Minh SmartSave. Lãi suất tham chiếu lên đến 6,2%/năm cho kỳ hạn 12 tháng, rút gốc linh hoạt theo điều khoản hợp đồng.\n\n• Minh bạch biểu phí, theo dõi biến động số dư 24/7 trên ứng dụng.\n• Lưu ý: Lợi suất thực tế phụ thuộc vào kỳ hạn gửi và chính sách từng thời kỳ."},
+  {cat:"Giáo dục",title:"Khóa học Tiếng Anh giao tiếp",product:"Khóa học SpeakUp 1-1",text:"Nâng cao phản xạ giao tiếp tiếng Anh trong môi trường công sở cùng lộ trình cá nhân hóa tại SpeakUp. Học viên được thực hành 1-1 cùng giảng viên có chứng chỉ giảng dạy quốc tế và đánh giá tiến độ định kỳ sau mỗi 15 buổi.\n\n• Hỗ trợ học lại miễn phí 1 khóa nếu hoàn thành trên 90% buổi học theo cam kết đầu vào.\n• Liên hệ để được kiểm tra trình độ đầu vào miễn phí."},
+  {cat:"Bất động sản",title:"Căn hộ ven sông khu Đông",product:"Dự án Riverside Garden",text:"Khám phá không gian sống xanh tại Riverside Garden với mật độ xây dựng chỉ 28%, tích hợp công viên ven sông và hệ thống tiện ích nội khu đồng bộ.\n\n• Pháp lý minh bạch, hỗ trợ vay ngân hàng tối đa 70% giá trị căn hộ theo chính sách của ngân hàng liên kết.\n• Đăng ký tham quan nhà mẫu thực tế vào cuối tuần này."}
+];
+function renderTemplates(cat="all"){
+  const list=cat==="all"?templatesData:templatesData.filter(t=>t.cat===cat);
+  $("templateGrid").innerHTML=list.map(t=>`
+    <article class="panel tpl-card">
+      <div>
+        <div class="panel-head" style="margin-bottom:10px"><div><span class="tag">${esc(t.cat)}</span><h3 style="margin:8px 0 0;font-size:15px">${esc(t.title)}</h3></div></div>
+        <div class="tpl-body">${esc(t.text)}</div>
+      </div>
+      <div class="actions" style="margin-top:6px">
+        <button class="btn btn-primary" onclick="useTemplate('${esc(t.product)}','${esc(t.cat)}',${templatesData.indexOf(t)})">✦ Dùng mẫu này để kiểm tra</button>
+      </div>
+    </article>
+  `).join("");
+}
+window.useTemplate=(product,cat,idx)=>{
+  const t=templatesData[idx];
+  $("product").value=product;
+  $("industry").value=cat;
+  $("adText").value=t.text;
+  $("charCount").textContent=t.text.length+" / 5.000";
+  showPage("checker");
+  document.querySelector('[data-mode="textMode"]').click();
+  toast("Đã nạp mẫu quảng cáo an toàn vào trình kiểm tra");
+};
+document.querySelectorAll(".tpl-filter").forEach(btn=>btn.addEventListener("click",()=>{
+  document.querySelectorAll(".tpl-filter").forEach(b=>b.classList.remove("active"));
+  btn.classList.add("active");
+  renderTemplates(btn.dataset.cat);
+}));
+
+/* NHẮC NHỞ KIỂM TRA */
+let reminderTimer=null;
+function initReminder(){
+  const cfg=JSON.parse(localStorage.getItem("adcheck_reminder")||'{"on":false,"mins":30,"note":""}');
+  $("reminderToggle").value=cfg.on?"on":"off";
+  $("reminderMinutes").value=String(cfg.mins||30);
+  $("reminderNote").value=cfg.note||"";
+  $("bellDot").classList.toggle("hidden",!cfg.on);
+  if(reminderTimer) clearInterval(reminderTimer);
+  if(cfg.on){
+    reminderTimer=setInterval(()=>{
+      playSound("warn");
+      toast(`🔔 Nhắc nhở: ${cfg.note||"Đừng quên rà soát quảng cáo trên AdCheck AI trước khi đăng!"}`);
+    },(cfg.mins||30)*60*1000);
+  }
+}
+$("reminderBtn").addEventListener("click",()=>$("reminderModal").classList.add("open"));
+$("closeReminderModal").addEventListener("click",()=>$("reminderModal").classList.remove("open"));
+$("saveReminderBtn").addEventListener("click",()=>{
+  const on=$("reminderToggle").value==="on";
+  const mins=parseInt($("reminderMinutes").value,10)||30;
+  const note=$("reminderNote").value.trim();
+  localStorage.setItem("adcheck_reminder",JSON.stringify({on,mins,note}));
+  initReminder();
+  $("reminderModal").classList.remove("open");
+  toast(on?`🔔 Đã bật nhắc nhở mỗi ${mins} phút`:"Đã tắt nhắc nhở kiểm tra");
+});
+$("rewardBadge").addEventListener("click",()=>showPage("home"));
+
+/* THEME, NAVIGATION & OCR */
+$("themeBtn").addEventListener("click",()=>{document.body.classList.toggle("dark");$("themeBtn").textContent=document.body.classList.contains("dark")?"☀":"☾";localStorage.setItem("adcheck_dark",document.body.classList.contains("dark")?"1":"0")});
+if(localStorage.getItem("adcheck_dark")==="1"){document.body.classList.add("dark");$("themeBtn").textContent="☀"}
+
+function showPage(name){
+ document.querySelectorAll(".page").forEach(p=>p.classList.toggle("active",p.id==="page-"+name));
+ document.querySelectorAll("[data-page]").forEach(b=>b.classList.toggle("active",b.dataset.page===name));
+ const labels={home:"Tổng quan",checker:"Kiểm tra quảng cáo",quiz:"Thử thách săn lỗi",history:"Lịch sử kiểm tra",checklist:"Checklist trước khi đăng",templates:"Thư viện mẫu quảng cáo",guide:"Hướng dẫn sử dụng",tips:"Mẹo quảng cáo an toàn"};
+ document.querySelector(".crumb").innerHTML='Không gian làm việc <span style="padding:0 7px">/</span><b style="color:var(--ink)">'+(labels[name]||"Tổng quan")+'</b>';
+ $("sidebar").classList.remove("open");window.scrollTo({top:0,behavior:"smooth"});
+}
+document.querySelectorAll("[data-page]").forEach(b=>b.addEventListener("click",()=>showPage(b.dataset.page)));
+$("quickCheck").addEventListener("click",()=>showPage("checker"));
+document.querySelectorAll("[data-mode]").forEach(b=>b.addEventListener("click",()=>{
+ document.querySelectorAll("[data-mode]").forEach(x=>x.classList.toggle("active",x===b));
+ document.querySelectorAll(".mode-panel").forEach(x=>x.classList.toggle("active",x.id===b.dataset.mode));
+}));
+$("menuBtn").addEventListener("click",()=>$("sidebar").classList.toggle("open"));
+
+let selectedImage=null;
+function setImage(file){
+ if(!file)return;
+ if(!/^image\/(png|jpeg|webp)$/.test(file.type)){toast("Vui lòng chọn ảnh PNG, JPG hoặc WEBP.");return}
+ if(file.size>10*1024*1024){toast("Ảnh vượt quá 10 MB. Vui lòng chọn ảnh nhỏ hơn.");return}
+ selectedImage=file;
+ const url=URL.createObjectURL(file);$("imagePreview").src=url;
+ $("imageName").textContent=file.name;$("imageMeta").textContent=(file.size/1024/1024).toFixed(2)+" MB · "+file.type;
+ $("imagePreviewWrap").classList.remove("hidden");$("ocrBtn").disabled=false;
+ $("ocrStatus").textContent="Ảnh đã sẵn sàng. Nhấn “Trích xuất chữ” để nhận diện nội dung.";
+}
+$("chooseImage").addEventListener("click",()=>$("imageInput").click());
+$("imageInput").addEventListener("change",e=>setImage(e.target.files[0]));
+$("removeImage").addEventListener("click",()=>{selectedImage=null;$("imageInput").value="";$("imagePreviewWrap").classList.add("hidden");$("ocrBtn").disabled=true;$("ocrStatus").textContent="Đã xóa ảnh. Bạn có thể tải ảnh khác lên.";});
+["dragenter","dragover"].forEach(ev=>$("dropZone").addEventListener(ev,e=>{e.preventDefault();$("dropZone").classList.add("drag")}));
+["dragleave","drop"].forEach(ev=>$("dropZone").addEventListener(ev,e=>{e.preventDefault();$("dropZone").classList.remove("drag")}));
+$("dropZone").addEventListener("drop",e=>setImage(e.dataTransfer.files[0]));
+$("ocrBtn").addEventListener("click",async()=>{
+ if(!selectedImage)return;
+ if(!window.Tesseract){$("ocrStatus").textContent="Không tải được công cụ nhận diện chữ. Hãy chuyển sang tab “Nhập nội dung” và nhập/dán phần chữ trên ảnh.";return}
+ const btn=$("ocrBtn");btn.disabled=true;btn.textContent="◌ Đang nhận diện chữ...";
+ $("ocrStatus").textContent="Đang đọc chữ trong ảnh. Lần đầu có thể cần tải dữ liệu ngôn ngữ, vui lòng chờ...";
+ try{
+  const worker=await Tesseract.createWorker("vie+eng",1,{logger:m=>{if(m.status==="recognizing text")$("ocrStatus").textContent="Đang nhận diện chữ: "+Math.round((m.progress||0)*100)+"%";}});
+  const result=await worker.recognize(selectedImage);await worker.terminate();
+  const recognized=(result.data.text||"").trim();
+  if(!recognized){$("ocrStatus").textContent="Chưa nhận diện được chữ. Hãy chọn ảnh rõ hơn hoặc nhập nội dung thủ công ở tab thứ hai.";toast("Không tìm thấy chữ trong ảnh");}
+  else{
+   $("adText").value=recognized;$("charCount").textContent=recognized.length+" / 5.000";
+   document.querySelector('[data-mode="textMode"]').click();
+   $("ocrStatus").textContent="Đã trích xuất được "+recognized.length+" ký tự. Bạn nên đọc và sửa lại lỗi nhận diện trước khi phân tích.";
+   $("adText").focus();toast("Đã chuyển nội dung nhận diện sang phần nhập liệu");
+  }
+ }catch(err){$("ocrStatus").textContent="Không thể nhận diện chữ lúc này. Hãy kiểm tra kết nối internet hoặc nhập nội dung thủ công ở tab thứ hai.";toast("Nhận diện ảnh chưa thành công");}
+ finally{btn.disabled=false;btn.textContent="✦ Trích xuất chữ";}
+});
+
+// Kiểm tra nếu mở từ link chia sẻ QR
+if(location.hash.startsWith("#report=")){
+  try{
+    const data=JSON.parse(decodeURIComponent(escape(atob(location.hash.replace("#report=","")))));
+    setTimeout(()=>toast(`🔗 Đang xem báo cáo chia sẻ: ${data.p} (${data.s}/100 điểm)`),600);
+  }catch(e){}
+}
+
+// Khởi tạo toàn bộ dữ liệu
+renderHistory();
+renderRewards();
+renderChecklist();
+renderTemplates();
+initReminder();
+renderQuiz();
+</script>
+</body>
+</html>
